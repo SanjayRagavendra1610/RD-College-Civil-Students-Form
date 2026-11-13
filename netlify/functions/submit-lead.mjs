@@ -60,8 +60,8 @@ export async function handler(event) {
   if (origin && !origins.has(origin)) return json(403, { success: false, error: "Origin not allowed." });
 
   try {
-    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-      console.error("Missing Google Sheets service account credentials.");
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !SPREADSHEET_ID) {
+      console.error("Missing Google Sheets service account credentials or spreadsheet ID.");
       return json(503, {
         success: false,
         code: "SHEETS_NOT_CONFIGURED",

@@ -9,7 +9,7 @@ import {
 import { ensureStudentSheet, SPREADSHEET_ID } from "./_shared/lead-sheet-schema.mjs";
 
 function sheetsClient() {
-  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !SPREADSHEET_ID) {
     throw new Error("Google Sheets is not configured.");
   }
   const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);

@@ -3,7 +3,7 @@
 The student registration form is in index.html. Netlify Functions validate submissions and write them to the private School Students worksheet in the configured spreadsheet. The form displays its thank-you receipt only after Google Sheets confirms the save.
 
 Default spreadsheet:
-1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs
+Configured in Netlify through the `GOOGLE_SHEET_ID` environment variable.
 
 ## Form fields
 
@@ -14,9 +14,9 @@ The district dropdown and server validation use the same 38 Tamil Nadu districts
 ## Google Sheets and Netlify setup
 
 1. In Google Cloud Console, enable the Google Sheets API and create a service account with a JSON key.
-2. Share the spreadsheet above with the service account's client_email as Editor. Keep the spreadsheet private.
+2. Share the configured target spreadsheet with the service account's client_email as Editor. Keep the spreadsheet private.
 3. In the Netlify site's environment variables, set:
-   - GOOGLE_SHEET_ID = 1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs
+   - GOOGLE_SHEET_ID = the ID of the private target spreadsheet
    - GOOGLE_SERVICE_ACCOUNT_JSON = the full service-account JSON as a single-line JSON value
    - ALLOWED_ORIGIN = the production origin of the Netlify site
    - ADMIN_ACCESS_KEY = a strong organizer-only key for Admin Responses

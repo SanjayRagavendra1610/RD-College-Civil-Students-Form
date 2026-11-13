@@ -21,8 +21,7 @@ const REMOVED_LEGACY_HEADERS = new Set([
   "11. Attendee Food Options (same order)",
 ]);
 
-export const SPREADSHEET_ID =
-  process.env.GOOGLE_SHEET_ID || "1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs";
+export const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID || "";
 
 function quoteSheetTitle(title) {
   return `'${String(title).replace(/'/g, "''")}'`;

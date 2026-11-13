@@ -469,7 +469,7 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
-                        <a id="openConnectedSheetBtn" href="https://docs.google.com/spreadsheets/d/1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs/edit" target="_blank" rel="noopener noreferrer" class="inline-flex px-3 py-1.5 rounded-lg bg-rdmaroon text-rdgold text-xs font-bold items-center gap-1.5 shadow hover:opacity-90 transition">
+                        <a id="openConnectedSheetBtn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex px-3 py-1.5 rounded-lg bg-rdmaroon text-rdgold text-xs font-bold items-center gap-1.5 shadow hover:opacity-90 transition">
                             <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Student Sheet
                         </a>
                     </div>
@@ -677,9 +677,8 @@
             </div>
             <div class="p-6 space-y-4 text-sm text-rdnavy">
                 <p>Student registrations are saved by Netlify Functions in the private <strong>School Students</strong> worksheet.</p>
-                <p>Spreadsheet ID: <code class="break-all">1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs</code></p>
+                <p>The target spreadsheet is configured securely through Netlify.</p>
                 <p>Netlify needs <code>GOOGLE_SERVICE_ACCOUNT_JSON</code>, <code>GOOGLE_SHEET_ID</code>, <code>ALLOWED_ORIGIN</code>, and <code>ADMIN_ACCESS_KEY</code>. Share the spreadsheet with the service account as Editor.</p>
-                <a href="https://docs.google.com/spreadsheets/d/1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs/edit" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-lg bg-rdnavy text-rdgold font-bold">Open student sheet</a>
             </div>
         </div>
     </div>
@@ -2168,8 +2167,8 @@
         window.toggleDriveSetupModal=function(show){const modal=document.getElementById('driveSetupModal');if(modal){modal.classList.toggle('hidden',!show);modal.classList.toggle('flex',!!show);}};
         window.saveGoogleDriveConfig=function(){showFeedback('Google Sheets is connected through the Netlify Functions environment.',false);};
         function showDriveModalMessage(message,isError=false){showFeedback(message,isError);}
-        function updateDriveUIStatus(){const pill=document.getElementById('driveStatusPill');if(pill)pill.textContent='Netlify + Google Sheets';const link=document.getElementById('openConnectedSheetBtn');if(link)link.href='https://docs.google.com/spreadsheets/d/1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs/edit';}
-        function loadGoogleDriveConfig(){googleScriptWebAppUrl='';googleSheetViewUrl='https://docs.google.com/spreadsheets/d/1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs/edit';updateDriveUIStatus();}
+        function updateDriveUIStatus(){const pill=document.getElementById('driveStatusPill');if(pill)pill.textContent='Netlify + Google Sheets';}
+        function loadGoogleDriveConfig(){googleScriptWebAppUrl='';googleSheetViewUrl='';updateDriveUIStatus();}
         function sanitizeScriptUrl(){return '';}
         window.autoSaveDriveUrlOnInput=function(){};
         window.fetchFromGoogleSheet=async function(){return fetchAdminLeads();};
