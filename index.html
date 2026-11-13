@@ -1,9 +1,9 @@
-y<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ta">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"KUDIMAIPANIYATRUPADAI" on November 28</title>
+    <title>RDCCPS School Student Registration</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Cinzel for Academic Identity -->
@@ -126,10 +126,10 @@ y<!DOCTYPE html>
                     <span class="text-[10px] uppercase tracking-widest text-rdgold font-bold block leading-tight">RD College of Commerce & Professional Studies</span>
                     <div class="flex items-center gap-2 flex-wrap">
                         <h1 class="font-serif font-bold text-xs sm:text-base tracking-wide text-rdlight">RDCCPS "KUDIMAIPANIYATRUPADAI"</h1>
-                        <!-- Live Auto-Save Status Pill (Like Google Docs / Drive "Changes saved in Drive") -->
+                        <!-- Live Auto-Save Status Pill (Like Google Docs / Drive "Ready for registration") -->
                         <span id="liveDriveSaveBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rdlight/10 border border-rdgold/50 text-[10px] font-semibold text-rdgold transition-all">
                             <i id="liveDriveSaveIcon" class="fa-solid fa-cloud-arrow-up text-rdgold"></i>
-                            <span id="liveDriveSaveText">Changes saved in Drive</span>
+                            <span id="liveDriveSaveText">Ready for registration</span>
                         </span>
                     </div>
                 </div>
@@ -180,7 +180,7 @@ y<!DOCTYPE html>
     <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 sm:py-8">
 
         <!-- ==========================================
-             VIEW 1: CONSULTANCY REGISTRATION FORM
+             VIEW 1: SCHOOL STUDENT REGISTRATION FORM
              ========================================== -->
         <section id="viewForm" class="space-y-6">
             <!-- Main Form Card with 3-Color Theme & Unique Pattern -->
@@ -211,104 +211,62 @@ y<!DOCTYPE html>
                             <i class="fa-solid fa-shield-halved"></i> Update Logo
                         </button>
                         <button type="button" id="adminQrShortcutBtn" onclick="switchTab('qr')" class="hidden px-3 py-1.5 rounded-lg bg-rdgold text-rdnavy font-bold text-xs items-center gap-1.5 hover:opacity-90 transition shadow">
-                            <i class="fa-solid fa-qrcode"></i> Generate QR for Consultancies
+                            <i class="fa-solid fa-qrcode"></i> Generate Student Registration QR
                         </button>
                     </div>
                 </div>
 
                 <!-- Fillable Form Body -->
-                <form id="consultancyForm" class="p-5 sm:p-9 space-y-5 bg-rdlight">
-                    <!-- Status Alert Box (Hidden by default) -->
+                <form id="studentRegistrationForm" class="p-5 sm:p-9 space-y-5 bg-rdlight">
                     <div id="formFeedback" class="hidden rounded-xl p-4 border-2"></div>
-
-                    <!-- Question 1: Student Name? -->
                     <div class="bg-white p-5 rounded-xl border-l-8 border-rdnavy shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="consultancyName" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdnavy text-rdgold text-xs font-extrabold mr-2">1</span>
-                            Student Name? / மாணவர் பெயர்? <span class="text-rdmaroon font-extrabold">*</span>
-                        </label>
-                        <input type="text" id="consultancyName" name="consultancyName" required
-                            placeholder="Type your Name / உங்கள் பெயரை உள்ளிடவும்"
-                            class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
+                        <label for="studentName" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">1. Student Name / மாணவர் பெயர் <span class="text-rdmaroon">*</span></label>
+                        <input type="text" id="studentName" name="studentName" maxlength="500" required placeholder="Enter student's full name / மாணவர் பெயர்" class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
                     </div>
-
-                    <!-- Question 2: Parents Name? -->
                     <div class="bg-white p-5 rounded-xl border-l-8 border-rdmaroon shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="consultantName" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdmaroon text-rdgold text-xs font-extrabold mr-2">2</span>
-                            Parents Name? / பெற்றோர் பெயர்? <span class="text-rdmaroon font-extrabold">*</span>
-                        </label>
-                        <input type="text" id="consultantName" name="consultantName" required
-                            placeholder="Type Your Parent Name Father or Mother / பெற்றோரின் பெயரை எழுதவும்"
-                            class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
+                        <label for="schoolName" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">2. School Name / பள்ளியின் பெயர் <span class="text-rdmaroon">*</span></label>
+                        <input type="text" id="schoolName" name="schoolName" maxlength="500" required placeholder="Enter school name / பள்ளியின் பெயர்" class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
                     </div>
-
-                    <!-- Question 3: District? -->
                     <div class="bg-white p-5 rounded-xl border-l-8 border-rdnavy shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="consultancyAddress" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdnavy text-rdgold text-xs font-extrabold mr-2">3</span>
-                            District? / மாவட்டம்? <span class="text-rdmaroon font-extrabold">*</span>
-                        </label>
-                        <textarea id="consultancyAddress" name="consultancyAddress" rows="3" required
-                            placeholder="Type Your District / உங்கள் மாவட்டத்தை உள்ளிடவும்"
-                            class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium"></textarea>
+                        <label for="district" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">3. District / மாவட்டம் <span class="text-rdmaroon">*</span></label>
+                        <select id="district" name="district" required class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium"><option value="">Select your district / மாவட்டத்தைத் தேர்ந்தெடுக்கவும்</option><option value="Ariyalur">Ariyalur</option><option value="Chengalpattu">Chengalpattu</option><option value="Chennai">Chennai</option><option value="Coimbatore">Coimbatore</option><option value="Cuddalore">Cuddalore</option><option value="Dharmapuri">Dharmapuri</option><option value="Dindigul">Dindigul</option><option value="Erode">Erode</option><option value="Kallakurichi">Kallakurichi</option><option value="Kancheepuram">Kancheepuram</option><option value="Kanniyakumari">Kanniyakumari</option><option value="Karur">Karur</option><option value="Krishnagiri">Krishnagiri</option><option value="Madurai">Madurai</option><option value="Mayiladuthurai">Mayiladuthurai</option><option value="Nagapattinam">Nagapattinam</option><option value="Namakkal">Namakkal</option><option value="Perambalur">Perambalur</option><option value="Pudukkottai">Pudukkottai</option><option value="Ramanathapuram">Ramanathapuram</option><option value="Ranipet">Ranipet</option><option value="Salem">Salem</option><option value="Sivaganga">Sivaganga</option><option value="Tenkasi">Tenkasi</option><option value="Thanjavur">Thanjavur</option><option value="Theni">Theni</option><option value="The Nilgiris">The Nilgiris</option><option value="Thoothukudi">Thoothukudi</option><option value="Tiruchirappalli">Tiruchirappalli</option><option value="Tirunelveli">Tirunelveli</option><option value="Tirupathur">Tirupathur</option><option value="Tiruppur">Tiruppur</option><option value="Tiruvallur">Tiruvallur</option><option value="Tiruvannamalai">Tiruvannamalai</option><option value="Tiruvarur">Tiruvarur</option><option value="Vellore">Vellore</option><option value="Viluppuram">Viluppuram</option><option value="Virudhunagar">Virudhunagar</option></select>
                     </div>
-
-                    <!-- Question 4: Parents Phone Number? -->
                     <div class="bg-white p-5 rounded-xl border-l-8 border-rdmaroon shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="contactNumber" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdmaroon text-rdgold text-xs font-extrabold mr-2">4</span>
-                           Parents Phone Number? / பெற்றோர் தொலைபேசி எண்? <span class="text-rdmaroon font-extrabold">*</span>
-                        </label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-rdnavy/70 font-bold text-sm">
-                                <i class="fa-solid fa-phone mr-1.5 text-rdmaroon"></i>
-                            </span>
-                            <input type="tel" id="contactNumber" name="contactNumber" required
-                                placeholder="Type Mobile / WhatsApp Contact Number / தொலைபேசி அல்லது வாட்ஸ்அப் எண்ணை உள்ளிடவும்"
-                                class="rd-input w-full rounded-lg pl-11 pr-4 py-3 text-sm sm:text-base font-medium">
+                        <label for="className" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">4. Class / Grade / வகுப்பு <span class="text-rdmaroon">*</span></label>
+                        <input type="text" id="className" name="className" maxlength="100" required placeholder="For example, Class 10 / 10ஆம் வகுப்பு" class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdnavy shadow-sm ring-1 ring-rdnavy/10">
+                        <label for="parentName" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">5. Parent / Guardian Name / பெற்றோர் பெயர் <span class="text-rdmaroon">*</span></label>
+                        <input type="text" id="parentName" name="parentName" maxlength="500" required placeholder="Enter parent or guardian's name / பெற்றோர் பெயர்" class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdmaroon shadow-sm ring-1 ring-rdnavy/10">
+                        <label for="parentPhone" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">6. Parent / Guardian Phone / பெற்றோர் தொலைபேசி எண் <span class="text-rdmaroon">*</span></label>
+                        <input type="tel" id="parentPhone" name="parentPhone" maxlength="30" required placeholder="Mobile or WhatsApp number / தொலைபேசி எண்" class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdnavy shadow-sm ring-1 ring-rdnavy/10">
+                        <label for="parentEmail" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">7. Parent / Guardian Email / மின்னஞ்சல் <span class="text-xs font-medium text-rdnavy/60">(optional / விருப்பம்)</span></label>
+                        <input type="email" id="parentEmail" name="parentEmail" maxlength="320" placeholder="name@example.com" class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdmaroon shadow-sm ring-1 ring-rdnavy/10">
+                        <label for="interest" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">8. Course / Area of Interest / விருப்பப் பாடம் <span class="text-rdmaroon">*</span></label>
+                        <input type="text" id="interest" name="interest" maxlength="1000" required placeholder="Civil Service, Commerce, or another area / ஆர்வமுள்ள பாடம்" class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdnavy shadow-sm ring-1 ring-rdnavy/10">
+                        <label for="message" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">9. Message / செய்தி <span class="text-xs font-medium text-rdnavy/60">(optional / விருப்பம்)</span></label>
+                        <textarea id="message" name="message" maxlength="5000" rows="3" placeholder="Any question or note for the college / கேள்வி அல்லது செய்தி" class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium"></textarea>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdmaroon shadow-sm ring-1 ring-rdnavy/10">
+                        <label for="civilServiceInterested" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">10. Interested in Civil Service Exam Preparation? / சிவில் சர்வீஸ் தேர்வுத் தயாரிப்பில் ஆர்வமா? <span class="text-rdmaroon">*</span></label>
+                        <select id="civilServiceInterested" name="civilServiceInterested" required class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium"><option value="">Select Yes or No / ஆம் அல்லது இல்லை</option><option value="Yes">Yes / ஆம்</option><option value="No">No / இல்லை</option></select>
+                    </div>
+                    <div class="bg-rdnavy/5 rounded-xl p-4 border border-rdnavy/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2 text-xs sm:text-sm font-bold text-rdnavy"><i class="fa-solid fa-cloud-check text-rdmaroon"></i><span id="draftAutoSaveStatus">Form draft auto-saved on this device / இந்த சாதனத்தில் தற்காலிகமாக சேமிக்கப்படும்</span></div>
+                            <label class="flex items-center gap-2 cursor-pointer text-xs text-rdnavy/80"><input type="checkbox" id="alsoOpenEmail" class="w-3.5 h-3.5 accent-rdmaroon rounded"><span>Open an email receipt after submitting / மின்னஞ்சல் ரசீதைத் திறக்கவும்</span></label>
                         </div>
+                        <span id="formSyncStatusBadge" class="text-xs font-semibold text-rdnavy bg-rdgold/50 px-2.5 py-1 rounded flex items-center gap-1.5"><i class="fa-brands fa-google-drive text-rdmaroon"></i><span>Google Sheets connection</span></span>
                     </div>
-
-                    <!-- Question 5: School Name? -->
-                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdmaroon shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="consultancyRequirements" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdmaroon text-rdgold text-xs font-extrabold mr-2">5</span>
-                            School Name? / பள்ளியின் பெயர்? <span class="text-rdmaroon font-extrabold">*</span>
-                        </label>
-                        <textarea id="consultancyRequirements" name="consultancyRequirements" rows="3" required
-                            placeholder="Type your School Name / உங்கள் பள்ளியின் பெயரை உள்ளிடவும்"
-                            class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium"></textarea>
-                    </div>
-
-                    <!-- Question 6: Email Address? -->
-                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdnavy shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="emailAddress" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdnavy text-rdgold text-xs font-extrabold mr-2">6</span>
-                            Email Address? / மின்னஞ்சல் முகவரி? <span class="text-rdmaroon font-extrabold">*</span>
-                        </label>
-                        <input type="email" id="emailAddress" name="emailAddress" required
-                            placeholder="example@gmail.com / உதாரணம்@gmail.com"
-                            class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
-                    </div>
-
-                    <!-- Question 7: Intrested in Civil Service Exam Preparation -->
-                    <div class="bg-white p-5 rounded-xl border-l-8 border-rdmaroon shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="civilServiceInterest" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdmaroon text-rdgold text-xs font-extrabold mr-2">7</span>
-                            Interested in Civil Service Exam Preparation? / சிவில் சர்வீஸ் தேர்வு தயாரிப்பில் ஆர்வமா? <span class="text-rdmaroon font-extrabold">*</span>
-                        </label>
-                        <input type="text" id="civilServiceInterest" name="civilServiceInterest" required
-                            placeholder="Yes or No / ஆம் அல்லது இல்லை"
-                            class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
-                    </div>
-                    <!-- Submit Button -->
-                    <div class="pt-2">
-                        <button type="submit" id="submitBtn" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-rdnavy via-rdmaroon to-rdnavy hover:opacity-95 text-rdlight font-serif font-bold text-base sm:text-lg tracking-wider uppercase border-2 border-rdgold shadow-xl hover:shadow-2xl transition flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-paper-plane text-rdgold"></i>
-                            <span>Submit / சமர்ப்பிக்கவும்</span>
-                        </button>
-                    </div>
+                    <div class="pt-2"><button type="submit" id="submitBtn" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-rdnavy via-rdmaroon to-rdnavy hover:opacity-95 text-rdlight font-serif font-bold text-base sm:text-lg tracking-wider uppercase border-2 border-rdgold shadow-xl hover:shadow-2xl transition flex items-center justify-center gap-3"><i class="fa-solid fa-paper-plane text-rdgold"></i><span>Submit / சமர்ப்பிக்கவும்</span></button></div>
                 </form>
 
                 <!-- Dedicated Support Footer Block -->
@@ -319,7 +277,7 @@ y<!DOCTYPE html>
                                 <i class="fa-solid fa-headset"></i>
                             </div>
                             <div>
-                                <p class="text-xs uppercase tracking-widest text-rdgold font-bold">In case of Support Contact Us</p>
+                                <p class="text-xs uppercase tracking-widest text-rdgold font-bold">Thank you for registering • Support</p>
                                 <a href="tel:+919787523888" class="text-xl sm:text-2xl font-extrabold text-rdlight hover:text-rdgold transition tracking-wide block mt-0.5">
                                     +91 9787523888
                                 </a>
@@ -333,7 +291,7 @@ y<!DOCTYPE html>
                             <a href="tel:+919787523888" class="px-4 py-2.5 rounded-xl bg-rdgold text-rdnavy font-bold text-xs sm:text-sm flex items-center gap-2 shadow hover:opacity-90 transition">
                                 <i class="fa-solid fa-phone-volume"></i> Call Now
                             </a>
-                            <a href="https://wa.me/919787523888?text=Hello%20RDCCPS%20Admission%20Team%2C%20I%20have%20a%20query%20regarding%20the%20Consultancy%20Meet%20Admission%202027-2028." target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-rdmaroon text-rdgold border border-rdgold font-bold text-xs sm:text-sm flex items-center gap-2 shadow hover:opacity-90 transition">
+                            <a href="https://wa.me/919787523888?text=Hello%20RDCCPS%20Admission%20Team%2C%20I%20have%20a%20query%20regarding%20the%20Student%20Meet%20Admission%202027-2028." target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-rdmaroon text-rdgold border border-rdgold font-bold text-xs sm:text-sm flex items-center gap-2 shadow hover:opacity-90 transition">
                                 <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Support
                             </a>
                         </div>
@@ -346,7 +304,7 @@ y<!DOCTYPE html>
         </section>
 
         <!-- ==========================================
-             VIEW 2: ADMIN QR CODE GENERATOR FOR CONSULTANCIES
+             VIEW 2: ADMIN QR CODE GENERATOR FOR STUDENTS
              ========================================== -->
         <section id="viewQr" class="hidden space-y-6">
             <div class="bg-rdlight rounded-2xl shadow-2xl border-2 border-rdnavy overflow-hidden">
@@ -356,9 +314,9 @@ y<!DOCTYPE html>
                 <div class="p-6 sm:p-8 bg-rdnavy text-rdlight border-b-4 border-rdgold flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <span class="text-xs uppercase tracking-widest text-rdgold font-bold">Admin QR Generator • rdccpscollege@gmail.com</span>
-                        <h2 class="font-serif text-xl sm:text-2xl font-bold mt-1">Consultancy Registration QR Code (Admission 2027–2028)</h2>
+                        <h2 class="font-serif text-xl sm:text-2xl font-bold mt-1">School Student Registration QR Code</h2>
                         <p class="text-xs sm:text-sm text-rdlight/80 mt-1">
-                            Provide this QR Code to consultancies so they can scan it and directly fill out the <strong>RDCCPS "KUDIMAIPANIYATRUPADAI" – Admission 2027–2028</strong> form.
+                            Provide this QR Code to students and families so they can scan it and directly fill out the <strong>RDCCPS "KUDIMAIPANIYATRUPADAI" – Admission 2027–2028</strong> form.
                         </p>
                     </div>
                     <button onclick="switchTab('form')" class="px-4 py-2 rounded-xl bg-rdgold text-rdnavy font-bold text-xs sm:text-sm flex items-center gap-2 shadow hover:opacity-90 transition self-start sm:self-auto">
@@ -409,7 +367,7 @@ y<!DOCTYPE html>
                                 </button>
                             </div>
                             <div class="flex flex-wrap items-center gap-2 pt-1">
-                                <button type="button" onclick="copyFormLinkForConsultancy()" class="px-3 py-1.5 rounded-lg bg-rdnavy text-rdgold font-bold text-xs hover:opacity-90 transition flex items-center gap-1.5">
+                                <button type="button" onclick="copyStudentFormLink()" class="px-3 py-1.5 rounded-lg bg-rdnavy text-rdgold font-bold text-xs hover:opacity-90 transition flex items-center gap-1.5">
                                     <i class="fa-solid fa-copy"></i> Copy QR Link
                                 </button>
                                 <button type="button" onclick="useDefaultPortalUrlForQr()" class="px-3 py-1.5 rounded-lg bg-rdlight text-rdnavy border border-rdnavy/30 font-bold text-xs hover:bg-rdnavy hover:text-rdgold transition flex items-center gap-1.5">
@@ -425,7 +383,7 @@ y<!DOCTYPE html>
                         <!-- Download & Print Actions for Admin -->
                         <div class="bg-white p-5 rounded-xl border-2 border-rdnavy/15 space-y-3 shadow-sm">
                             <h3 class="text-xs sm:text-sm font-bold text-rdnavy uppercase tracking-wider">
-                                <i class="fa-solid fa-share-nodes text-rdmaroon mr-1"></i> Provide QR Code to Consultancies
+                                <i class="fa-solid fa-share-nodes text-rdmaroon mr-1"></i> Provide QR Code to Students and Families
                             </h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <button type="button" onclick="downloadQRCodeOnly()" class="py-3 px-4 rounded-xl bg-rdnavy text-rdgold border border-rdgold font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow hover:opacity-95 transition">
@@ -468,9 +426,9 @@ y<!DOCTYPE html>
                 <div class="p-6 sm:p-8 bg-rdnavy text-rdlight border-b-4 border-rdgold flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <span class="text-xs uppercase tracking-widest text-rdgold font-bold">Organizer Database • rdccpscollege@gmail.com</span>
-                        <h2 class="font-serif text-xl sm:text-2xl font-bold mt-1">"KUDIMAIPANIYATRUPADAI"Responses (Admission 2027–2028)</h2>
+                        <h2 class="font-serif text-xl sm:text-2xl font-bold mt-1">School Student Registrations</h2>
                         <p class="text-xs sm:text-sm text-rdlight/80 mt-1">
-                            View, search, export to Excel/CSV, or forward all submitted consultancy records to <strong>rdccpscollege@gmail.com</strong>.
+                            View, search, export, or email student registrations to <strong>rdccpscollege@gmail.com</strong>.
                         </p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2">
@@ -483,9 +441,6 @@ y<!DOCTYPE html>
                         <span class="px-4 py-2 rounded-xl bg-white text-rdnavy border-2 border-rdgold font-bold text-xs sm:text-sm flex items-center gap-2 shadow">
                             <i class="fa-brands fa-google-drive text-rdmaroon"></i> Google Sheets Connected
                         </span>
-                        <button onclick="toggleManualImportModal(true)" class="px-4 py-2 rounded-xl bg-white text-rdnavy border-2 border-rdnavy font-bold text-xs sm:text-sm flex items-center gap-2 shadow hover:opacity-90 transition">
-                            <i class="fa-solid fa-file-import text-rdmaroon"></i> Import Receipt / Backup
-                        </button>
                         <button onclick="emailAllSummaryToCollege()" class="px-4 py-2 rounded-xl bg-rdmaroon text-rdgold border border-rdgold font-bold text-xs sm:text-sm flex items-center gap-2 shadow hover:opacity-90 transition">
                             <i class="fa-solid fa-envelope"></i> Email Summary
                         </button>
@@ -503,9 +458,9 @@ y<!DOCTYPE html>
                         </div>
                         <div>
                             <div class="flex items-center gap-2 flex-wrap">
-                                <h3 class="text-xs sm:text-sm font-bold text-rdnavy">Google Drive Excel Sheet Auto-Sync (rdccpscollege@gmail.com)</h3>
+                                <h3 class="text-xs sm:text-sm font-bold text-rdnavy">Netlify + Google Sheets Student Leads</h3>
                                 <span id="driveStatusPill" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rdgold/40 text-rdnavy">
-                                    Local + Cloud Active
+                                    Connected through Netlify
                                 </span>
                             </div>
                             <p class="text-[11px] sm:text-xs text-rdnavy/75 mt-0.5">
@@ -514,8 +469,8 @@ y<!DOCTYPE html>
                         </div>
                     </div>
                     <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
-                        <a id="openConnectedSheetBtn" href="https://docs.google.com/spreadsheets/" target="_blank" rel="noopener noreferrer" class="inline-flex px-3 py-1.5 rounded-lg bg-rdmaroon text-rdgold text-xs font-bold items-center gap-1.5 shadow hover:opacity-90 transition">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Drive Sheet
+                        <a id="openConnectedSheetBtn" href="https://docs.google.com/spreadsheets/d/1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs/edit" target="_blank" rel="noopener noreferrer" class="inline-flex px-3 py-1.5 rounded-lg bg-rdmaroon text-rdgold text-xs font-bold items-center gap-1.5 shadow hover:opacity-90 transition">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Student Sheet
                         </a>
                     </div>
                 </div>
@@ -523,19 +478,19 @@ y<!DOCTYPE html>
                 <!-- Summary Stats Cards -->
                 <div class="p-6 pb-2 grid grid-cols-2 sm:grid-cols-4 gap-4">
                     <div class="bg-white p-4 rounded-xl border-2 border-rdnavy/15 shadow-sm">
-                        <span class="text-xs font-bold uppercase text-rdnavy/70">Total Consultancies</span>
+                        <span class="text-xs font-bold uppercase text-rdnavy/70">Total Students</span>
                         <p id="statTotal" class="text-2xl sm:text-3xl font-extrabold text-rdnavy mt-1">0</p>
                     </div>
                     <div class="bg-white p-4 rounded-xl border-2 border-rdmaroon/20 shadow-sm">
-                        <span class="text-xs font-bold uppercase text-rdmaroon">Total Persons Attended</span>
+                        <span class="text-xs font-bold uppercase text-rdmaroon">Districts Represented</span>
                         <p id="statPersons" class="text-2xl sm:text-3xl font-extrabold text-rdmaroon mt-1">0</p>
                     </div>
                     <div class="bg-white p-4 rounded-xl border-2 border-rdnavy/15 shadow-sm">
-                        <span class="text-xs font-bold uppercase text-rdnavy/70">Veg Attendees</span>
+                        <span class="text-xs font-bold uppercase text-rdnavy/70">Civil Service Interest: Yes</span>
                         <p id="statVeg" class="text-2xl sm:text-3xl font-extrabold text-rdnavy mt-1">0</p>
                     </div>
                     <div class="bg-white p-4 rounded-xl border-2 border-rdnavy/15 shadow-sm">
-                        <span class="text-xs font-bold uppercase text-rdnavy/70">Non-Veg Attendees</span>
+                        <span class="text-xs font-bold uppercase text-rdnavy/70">Non-Civil Service Interest: Yes</span>
                         <p id="statNonVeg" class="text-2xl sm:text-3xl font-extrabold text-rdmaroon mt-1">0</p>
                     </div>
                 </div>
@@ -546,7 +501,7 @@ y<!DOCTYPE html>
                         <div class="relative flex-grow">
                             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-rdnavy/50 text-sm"></i>
                             <input type="text" id="adminSearchInput" oninput="renderSubmissionsTable()"
-                                placeholder="Search by consultancy name, consultant, mobile number, food option..."
+                                placeholder="Search by student, school, district, parent, phone, or course..."
                                 class="rd-input w-full rounded-xl pl-10 pr-4 py-2 text-xs sm:text-sm">
                         </div>
                         <button type="button" onclick="refreshSubmissionsManual()" class="px-4 py-2 rounded-xl bg-rdnavy text-rdgold border border-rdgold font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow hover:opacity-90 transition shrink-0">
@@ -558,19 +513,16 @@ y<!DOCTYPE html>
                         <table class="w-full text-left border-collapse text-xs sm:text-sm">
                             <thead>
                                 <tr class="bg-rdnavy text-rdgold uppercase text-[11px] tracking-wider">
-                                    <th class="py-3 px-4">#</th>
-                                    <th class="py-3 px-4">1. Student Name</th>
-                                    <th class="py-3 px-4">2. Parents Name</th>
-                                    <th class="py-3 px-4">3. District</th>
-                                    <th class="py-3 px-4">4. Contact</th>
-                                    <th class="py-3 px-4">5. School name</th>
-                                    <th class="py-3 px-4">6. Intrested in Civil Service Exam Preparation</th>
+                                    <th class="py-3 px-4">#</th><th class="py-3 px-4">Student Name</th><th class="py-3 px-4">School Name</th>
+                                    <th class="py-3 px-4">District</th><th class="py-3 px-4">Class / Grade</th><th class="py-3 px-4">Parent / Guardian</th>
+                                    <th class="py-3 px-4">Phone</th><th class="py-3 px-4">Email</th><th class="py-3 px-4">Course / Interest</th>
+                                    <th class="py-3 px-4">Message</th><th class="py-3 px-4">Civil Service Prep</th><th class="py-3 px-4">Action</th>
                                 </tr>
-                            </thead>
+                            </thead>                            </thead>
                             <tbody id="submissionsTableBody" class="divide-y divide-rdnavy/10 text-rdnavy">
                                 <tr>
                                     <td colspan="12" class="py-10 text-center text-rdnavy/60 font-medium">
-                                        No consultancy registrations recorded yet.
+                                        No student registrations recorded yet.
                                     </td>
                                 </tr>
                             </tbody>
@@ -689,7 +641,7 @@ y<!DOCTYPE html>
                 </div>
                 <h3 class="font-serif font-extrabold text-xl text-rdnavy">Thank You! Your Submission Was Successful / நன்றி! உங்கள் பதிவு வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது</h3>
                 <p class="text-xs sm:text-sm text-rdnavy/80">
-                    Your registration has been successfully received and saved. The organizers can view it in the Admin Responses page. / உங்கள் பதிவு வெற்றிகரமாக பெறப்பட்டு சேமிக்கப்பட்டுள்ளது. அமைப்பாளர்கள் Admin Responses பக்கத்தில் அதைப் பார்க்கலாம்.
+                    Your student registration was saved to Google Sheets. The admissions team can view it in Admin Responses. / உங்கள் மாணவர் பதிவு Google Sheets-ல் சேமிக்கப்பட்டது.
                 </p>
 
                 <div id="successSummaryBox" class="bg-white p-4 rounded-xl border border-rdnavy/20 text-left text-xs space-y-1 text-rdnavy"></div>
@@ -716,181 +668,18 @@ y<!DOCTYPE html>
         </div>
     </div>
 
-    <!-- ==========================================
-         MODAL 4: GOOGLE DRIVE & EXCEL AUTO-SYNC SETUP
-         ========================================== -->
+    <!-- Netlify and Google Sheets connection details -->
     <div id="driveSetupModal" class="fixed inset-0 bg-rdnavy/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 no-print">
-        <div class="bg-rdlight rounded-2xl max-w-2xl w-full border-2 border-rdgold shadow-2xl overflow-hidden">
+        <div class="bg-rdlight rounded-2xl max-w-xl w-full border-2 border-rdgold shadow-2xl overflow-hidden">
             <div class="bg-rdnavy text-rdlight px-6 py-4 border-b-2 border-rdgold flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="fa-brands fa-google-drive text-rdgold text-lg"></i>
-                    <h3 class="font-serif font-bold text-base sm:text-lg">Auto-Save All Responses to Google Drive Excel Sheet</h3>
-                </div>
-                <button onclick="toggleDriveSetupModal(false)" class="text-rdlight hover:text-rdgold text-lg">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <h3 class="font-serif font-bold text-base sm:text-lg">Google Sheets Connection</h3>
+                <button type="button" onclick="toggleDriveSetupModal(false)" class="text-rdlight" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
-            <div class="p-6 space-y-4 max-h-[82vh] overflow-y-auto text-xs sm:text-sm text-rdnavy">
-                <div class="bg-white p-4 rounded-xl border-2 border-rdnavy/15 space-y-3">
-                    <div class="flex items-center justify-between gap-2 flex-wrap">
-                        <label for="googleScriptUrlInput" class="block font-bold text-rdnavy">
-                            1. Paste Your Google Sheet Web App URL (Apps Script Deployment URL)
-                        </label>
-                        <span id="modalScriptStatusBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rdgold/40 text-rdnavy">
-                            Paste &amp; Auto-Saves Instantly
-                        </span>
-                    </div>
-                    <input type="text" id="googleScriptUrlInput"
-                        oninput="autoSaveDriveUrlOnInput()"
-                        onpaste="setTimeout(autoSaveDriveUrlOnInput, 50)"
-                        placeholder="https://script.google.com/macros/s/.../exec"
-                        class="rd-input w-full rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-medium">
-
-                    <label for="googleSheetViewUrlInput" class="block font-bold text-rdnavy pt-1">
-                        2. Google Drive Spreadsheet View Link (Pre-Configured ✅)
-                    </label>
-                    <input type="text" id="googleSheetViewUrlInput"
-                        oninput="autoSaveDriveUrlOnInput()"
-                        onpaste="setTimeout(autoSaveDriveUrlOnInput, 50)"
-                        value=""
-                        placeholder="https://docs.google.com/spreadsheets/d/.../edit"
-                        class="rd-input w-full rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-medium">
-
-                    <!-- Currently Active Saved URL Preview -->
-                    <div id="savedDriveUrlPreviewBox" class="hidden p-2.5 rounded-lg bg-rdnavy/5 border border-rdnavy/20 text-[11px] text-rdnavy break-all">
-                        <span class="font-bold text-rdmaroon"><i class="fa-solid fa-circle-check mr-1"></i>Active Saved Deployment Link:</span>
-                        <span id="savedDriveUrlText" class="font-mono ml-1"></span>
-                    </div>
-
-                    <div id="driveModalFeedback" class="hidden rounded-lg p-3 text-xs font-bold"></div>
-
-                    <div class="flex flex-wrap items-center gap-2 pt-1">
-                        <button type="button" onclick="saveGoogleDriveConfig(true)" class="px-4 py-2.5 rounded-xl bg-rdnavy text-rdgold border border-rdgold font-bold text-xs flex items-center gap-1.5 shadow hover:opacity-95 transition">
-                            <i class="fa-solid fa-floppy-disk"></i> Save &amp; Connect Drive Sheet Now
-                        </button>
-                        <button type="button" onclick="copyGoogleSitesEmbedCode()" class="px-4 py-2.5 rounded-xl bg-rdgold text-rdnavy border border-rdnavy font-bold text-xs flex items-center gap-1.5 shadow hover:opacity-95 transition">
-                            <i class="fa-solid fa-code"></i> Copy Updated Google Sites Embed Code
-                        </button>
-                        <button type="button" onclick="refreshSubmissionsManual()" class="px-4 py-2.5 rounded-xl bg-white text-rdnavy border-2 border-rdnavy font-bold text-xs flex items-center gap-1.5 shadow hover:opacity-95 transition">
-                            <i class="fa-solid fa-cloud-arrow-down"></i> Sync Responses
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Hidden iframe target for 100% reliable Google Sites cross-origin POST submission -->
-                <iframe name="rdccps_hidden_gsheet_iframe" id="rdccps_hidden_gsheet_iframe" class="hidden"></iframe>
-
-                <!-- 1-Minute Setup Guide + Copyable Google Apps Script -->
-                <div class="bg-white p-4 rounded-xl border-2 border-rdnavy/15 space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-rdmaroon uppercase tracking-wider text-xs">
-                            <i class="fa-solid fa-bolt mr-1"></i> Updated Universal Google Apps Script (Works on Google Sites &amp; All Phones)
-                        </h4>
-                        <button type="button" onclick="copyAppsScriptCode()" class="px-3 py-1 rounded-lg bg-rdnavy text-rdgold font-bold text-[11px] flex items-center gap-1">
-                            <i class="fa-solid fa-copy"></i> Copy Script Code
-                        </button>
-                    </div>
-                    <ol class="list-decimal list-inside space-y-1 text-xs text-rdnavy/85">
-                        <li>Log into <strong>rdccpscollege@gmail.com</strong> (or <strong>rdccpcollege@gmail.com</strong>) and open <strong>Google Drive &rarr; New &rarr; Google Sheets</strong> (or open any Google Form / Sheet saved in your Drive).</li>
-                        <li>In the top menu of the Sheet, click <strong>Extensions &rarr; Apps Script</strong>.</li>
-                        <li>Delete any code there, paste the script below (which automatically creates your Drive Sheet file if needed), and click <strong>Deploy &rarr; New deployment</strong>.</li>
-                        <li>Select type: <strong>Web app</strong>, set <em>Execute as:</em> <strong>Me</strong>, and set <em>Who has access:</em> <strong>Anyone</strong>.</li>
-                        <li>Copy the <strong>Web app URL</strong> (`https://script.google.com/macros/s/.../exec`), paste it into Box 1 above, and click <strong>Save &amp; Activate Sync</strong> — all changes are automatically saved to the cloud &amp; Drive!</li>
-                    </ol>
-                    <textarea id="appsScriptCodeArea" readonly rows="10" class="w-full font-mono text-[11px] bg-rdnavy text-rdgold p-3 rounded-lg border border-rdgold focus:outline-none">// ============================================================
-// RDCCPS "KUDIMAIPANIYATRUPADAI" – Google Apps Script
-// This script writes form leads directly into YOUR Google Sheet:
-// https://docs.google.com/spreadsheets/
-// Steps: Extensions > Apps Script > Paste > Deploy > Web App > Anyone
-// ============================================================
-
-var SHEET_ID = "YOUR_GOOGLE_SHEET_ID";
-var TARGET_EMAIL = "rdccpscollege@gmail.com";
-
-function getSheet() {
-  var ss = SpreadsheetApp.openById(SHEET_ID);
-  var sheet = ss.getSheets()[0];
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(["Timestamp", "1. Consultancy Name", "2. Consultant Name", "3. Consultancy Address", "4. Contact Number", "5. Food Options", "6. Requirements", "7. Required Brochure", "8. Contact Number for Brochure Printing", "9. Persons Attended", "Record ID", "10. Attendee Names (one per line)", "11. Attendee Food Options (same order)"]);
-    sheet.getRange(1, 1, 1, 13).setBackground("#0D294D").setFontColor("#E8D587").setFontWeight("bold");
-    sheet.setFrozenRows(1);
-  } else if (sheet.getRange(1, 8).getValue() === "7. Required Brochure" &&
-             sheet.getRange(1, 9).getValue() !== "8. Contact Number for Brochure Printing") {
-    sheet.insertColumnAfter(8);
-    sheet.getRange(1, 9, 1, 5).setValues([["8. Contact Number for Brochure Printing", "9. Persons Attended", "Record ID", "10. Attendee Names (one per line)", "11. Attendee Food Options (same order)"]]);
-  }
-  return sheet;
-}
-
-function handleAction(sheet, data) {
-  if (data.action === "delete" && data.id) {
-    var rows = sheet.getDataRange().getValues();
-    for (var i = rows.length - 1; i >= 1; i--) {
-      if (String(rows[i][10]) === String(data.id)) { sheet.deleteRow(i + 1); }
-    }
-    return { status: "deleted", sheetUrl: SpreadsheetApp.openById(SHEET_ID).getUrl() };
-  }
-  if (data.action === "delete_all") {
-    if (sheet.getLastRow() > 1) { sheet.deleteRows(2, sheet.getLastRow() - 1); }
-    return { status: "cleared", sheetUrl: SpreadsheetApp.openById(SHEET_ID).getUrl() };
-  }
-  if (data.consultancyName || data.consultantName || data.contactNumber) {
-    var rows = sheet.getDataRange().getValues();
-    for (var r = 1; r < rows.length; r++) {
-      if (data.id && String(rows[r][10]) === String(data.id)) {
-        return { status: "already_exists" };
-      }
-    }
-    var ts = data.submittedReadable || new Date().toLocaleString("en-IN");
-    var recId = data.id || ("id_" + new Date().getTime());
-    sheet.appendRow([ ts, data.consultancyName||"", data.consultantName||"", data.consultancyAddress||"", data.contactNumber||"", data.foodOptions||"", data.consultancyRequirements||"", data.requiredBrochure||"", data.brochureContactNumber||"", data.personsAttended||"1", recId, data.attendeeNames||"", data.attendeeFoods||"" ]);
-    try {
-      MailApp.sendEmail({
-        to: "rdccpscollege@gmail.com,rdccpcollege@gmail.com",
-        subject: "New RDCCPS Consultancy Registration: " + (data.consultancyName || ""),
-        body: "RDCCPS "KUDIMAIPANIYATRUPADAI"\n\n1. Consultancy Name: " + (data.consultancyName||"") + "\n2. Consultant Name: " + (data.consultantName||"") + "\n3. Address: " + (data.consultancyAddress||"") + "\n4. Contact: " + (data.contactNumber||"") + "\n5. Food: " + (data.foodOptions||"") + "\n6. Requirements: " + (data.consultancyRequirements||"") + "\n7. Brochure: " + (data.requiredBrochure||"") + "\n8. Brochure Printing Contact: " + (data.brochureContactNumber||"") + "\n9. Persons: " + (data.personsAttended||"1") + "\nSubmitted: " + ts + "\n\nView all responses: https://docs.google.com/spreadsheets/"
-      });
-    } catch(mailErr) {}
-    return { status: "success", id: recId, sheetUrl: SpreadsheetApp.openById(SHEET_ID).getUrl() };
-  }
-  return { status: "noop" };
-}
-
-function doPost(e) {
-  var sheet = getSheet();
-  var data = {};
-  try {
-    if (e.parameter && e.parameter.payload) { data = JSON.parse(e.parameter.payload); }
-    else if (e.postData && e.postData.contents) { data = JSON.parse(e.postData.contents); }
-    else if (e.parameter) { data = e.parameter; }
-  } catch(err) {}
-  var res = handleAction(sheet, data);
-  return ContentService.createTextOutput(JSON.stringify(res)).setMimeType(ContentService.MimeType.JSON);
-}
-
-function doGet(e) {
-  var sheet = getSheet();
-  if (e && e.parameter && (e.parameter.action || e.parameter.payload)) {
-    var d = e.parameter.payload ? JSON.parse(e.parameter.payload) : e.parameter;
-    var actionRes = handleAction(sheet, d);
-    if (e.parameter.callback) {
-      return ContentService.createTextOutput(e.parameter.callback + "(" + JSON.stringify(actionRes) + ");").setMimeType(ContentService.MimeType.JAVASCRIPT);
-    }
-    return ContentService.createTextOutput(JSON.stringify(actionRes)).setMimeType(ContentService.MimeType.JSON);
-  }
-  var rows = sheet.getDataRange().getValues();
-  var result = [];
-  for (var i = 1; i < rows.length; i++) {
-    result.push({ submittedReadable: String(rows[i][0]||""), consultancyName: String(rows[i][1]||""), consultantName: String(rows[i][2]||""), consultancyAddress: String(rows[i][3]||""), contactNumber: String(rows[i][4]||""), foodOptions: String(rows[i][5]||""), consultancyRequirements: String(rows[i][6]||""), requiredBrochure: String(rows[i][7]||""), brochureContactNumber: String(rows[i][8]||""), personsAttended: String(rows[i][9]||"1"), id: String(rows[i][10]||("row_"+i)) });
-  }
-  var out = { rows: result, sheetUrl: SpreadsheetApp.openById(SHEET_ID).getUrl() };
-  if (e && e.parameter && e.parameter.callback) {
-    return ContentService.createTextOutput(e.parameter.callback + "(" + JSON.stringify(out) + ");").setMimeType(ContentService.MimeType.JAVASCRIPT);
-  }
-  return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);
-}</textarea>
-                </div>
+            <div class="p-6 space-y-4 text-sm text-rdnavy">
+                <p>Student registrations are saved by Netlify Functions in the private <strong>School Students</strong> worksheet.</p>
+                <p>Spreadsheet ID: <code class="break-all">1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs</code></p>
+                <p>Netlify needs <code>GOOGLE_SERVICE_ACCOUNT_JSON</code>, <code>GOOGLE_SHEET_ID</code>, <code>ALLOWED_ORIGIN</code>, and <code>ADMIN_ACCESS_KEY</code>. Share the spreadsheet with the service account as Editor.</p>
+                <a href="https://docs.google.com/spreadsheets/d/1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs/edit" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-lg bg-rdnavy text-rdgold font-bold">Open student sheet</a>
             </div>
         </div>
     </div>
@@ -911,7 +700,7 @@ function doGet(e) {
             </div>
             <div class="p-6 space-y-4">
                 <p id="deleteModalMessage" class="text-xs sm:text-sm text-rdnavy font-medium leading-relaxed">
-                    Are you sure you want to delete this received consultancy form?
+                    Are you sure you want to delete this student registration?
                 </p>
                 <div id="deleteModalDetails" class="bg-white p-3.5 rounded-xl border border-rdnavy/20 text-xs text-rdnavy space-y-1"></div>
                 <div class="flex items-center justify-end gap-3 pt-2">
@@ -920,40 +709,6 @@ function doGet(e) {
                     </button>
                     <button type="button" id="confirmDeleteActionBtn" onclick="executeConfirmedDelete()" class="px-5 py-2.5 rounded-xl bg-rdmaroon text-rdgold border border-rdgold font-bold text-xs sm:text-sm shadow hover:opacity-95 transition flex items-center gap-1.5">
                         <i class="fa-solid fa-trash-can"></i> Yes, Delete Form
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==========================================
-         MODAL 6: MANUAL / CSV / RECEIPT IMPORT MODAL (ADMIN ONLY)
-         ========================================== -->
-    <div id="manualImportModal" class="fixed inset-0 bg-rdnavy/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 no-print">
-        <div class="bg-rdlight rounded-2xl max-w-lg w-full border-2 border-rdgold shadow-2xl overflow-hidden">
-            <div class="bg-rdnavy text-rdlight px-6 py-4 border-b-2 border-rdgold flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-file-import text-rdgold"></i>
-                    <h3 class="font-serif font-bold text-base sm:text-lg">Import Received Form / Receipt into Admin Portal</h3>
-                </div>
-                <button onclick="toggleManualImportModal(false)" class="text-rdlight hover:text-rdgold text-lg">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-6 space-y-4 text-xs sm:text-sm text-rdnavy">
-                <p class="text-xs text-rdnavy/80 bg-white p-3 rounded-lg border border-rdnavy/15">
-                    Paste any WhatsApp/Email registration receipt text or JSON backup below to immediately add it into your <strong>Responses</strong> table and Google Drive Excel Sheet.
-                </p>
-                <textarea id="manualImportTextarea" rows="7"
-                    placeholder="Paste WhatsApp / Email receipt text here:&#10;1. Consultancy Name: ...&#10;2. Consultant Name: ...&#10;3. Consultancy Address: ...&#10;4. Contact Number: ...&#10;5. Food Options: Veg&#10;6. Consultancy's Requirements: ...&#10;7. Required Brochure: ...&#10;8. Contact Number for Brochure Printing: ...&#10;9. Number Of Persons attended: 2"
-                    class="rd-input w-full rounded-xl p-3.5 text-xs font-mono"></textarea>
-                <div id="manualImportFeedback" class="hidden rounded-lg p-2.5 text-xs font-bold"></div>
-                <div class="flex items-center justify-end gap-3">
-                    <button type="button" onclick="toggleManualImportModal(false)" class="px-4 py-2 rounded-xl border border-rdnavy/30 text-rdnavy font-bold text-xs">
-                        Close
-                    </button>
-                    <button type="button" onclick="processManualImportText()" class="px-5 py-2.5 rounded-xl bg-rdnavy text-rdgold border border-rdgold font-bold text-xs sm:text-sm shadow hover:opacity-95 transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-plus-circle"></i> Add to Responses Portal
                     </button>
                 </div>
             </div>
@@ -981,17 +736,17 @@ function doGet(e) {
         // Uploaded asset filenames from user session
         const UPLOADED_LOGO_FILENAME = "671474581_122108834637257567_4111852108872504954_n.jpg";
         const UPLOADED_CAMPUS_FILENAME = "Code_Generated_Image.jpg";
-        const STORAGE_SUBMISSIONS_KEY = "rdccps_consultancy_submissions_2027_v1";
-        const STORAGE_DELETED_IDS_KEY = "rdccps_consultancy_deleted_ids_2027_v1";
-        const STORAGE_BRANDING_KEY = "rdccps_consultancy_branding_2027_v1";
-        const STORAGE_DRIVE_CONFIG_KEY = "rdccps_google_drive_config_2027_v1";
+        const STORAGE_SUBMISSIONS_KEY = "rdccps_school_student_submissions_2027_v2";
+        const STORAGE_DELETED_IDS_KEY = "rdccps_school_student_deleted_ids_2027_v2";
+        const STORAGE_BRANDING_KEY = "rdccps_school_student_branding_2027_v2";
+        const STORAGE_DRIVE_CONFIG_KEY = "rdccps_student_sheet_config_2027_v2";
         const STORAGE_CUSTOM_QR_URL_KEY = "rdccps_custom_qr_url_2027_v1";
-        const STORAGE_FORM_DRAFT_KEY = "rdccps_consultancy_form_draft_2027_v1";
+        const STORAGE_FORM_DRAFT_KEY = "rdccps_school_student_form_draft_2027_v2";
 
         // Older versions copied full lead records to a public relay. Keep these
         // functions as no-ops so old call sites cannot expose new submissions.
-        const GLOBAL_CLOUD_SYNC_API = "https://kvdb.io/6Wa9sN8y2P4kL7mX3qR5vT";
-        const GLOBAL_CONFIG_CLOUD_URL = `${GLOBAL_CLOUD_SYNC_API}/rdccps_2027_config_v2`;
+        const GLOBAL_CLOUD_SYNC_API = "";
+        const GLOBAL_CONFIG_CLOUD_URL = "";
 
         async function pushStateToGlobalCloudRelay() {
             return;
@@ -1001,51 +756,11 @@ function doGet(e) {
             return;
         }
 
-        async function pushConfigToGlobalCloudRelay() {
-            try {
-                const cfgPayload = {
-                    scriptUrl: googleScriptWebAppUrl || '',
-                    sheetViewUrl: googleSheetViewUrl || '',
-                    customQrUrl: customQrLinkOverride || '',
-                    updatedAt: new Date().toISOString()
-                };
-                await fetch(GLOBAL_CONFIG_CLOUD_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(cfgPayload)
-                });
-            } catch (e) {}
-        }
+        async function pushConfigToGlobalCloudRelay() { return; }
 
-        async function pullConfigFromGlobalCloudRelay() {
-            try {
-                const res = await fetch(`${GLOBAL_CONFIG_CLOUD_URL}?_t=${Date.now()}`);
-                if (!res.ok) return;
-                const cfg = await res.json();
-                if (!cfg) return;
-                let changed = false;
-                if (cfg.scriptUrl && !googleScriptWebAppUrl) {
-                    googleScriptWebAppUrl = sanitizeScriptUrl(cfg.scriptUrl);
-                    changed = true;
-                }
-                if (cfg.sheetViewUrl && !googleSheetViewUrl) {
-                    googleSheetViewUrl = cfg.sheetViewUrl;
-                    changed = true;
-                }
-                if (cfg.customQrUrl && !customQrLinkOverride) {
-                    customQrLinkOverride = cfg.customQrUrl;
-                    changed = true;
-                }
-                if (changed) {
-                    persistDriveConfigEverywhere(googleScriptWebAppUrl, googleSheetViewUrl);
-                    updateDriveUIStatus();
-                    loadSavedCustomQrLink();
-                    renderCustomQRCode();
-                }
-            } catch (e) {}
-        }
+        async function pullConfigFromGlobalCloudRelay() { return; }
 
-        // Live Header "Saving... -> Changes saved in Drive" status indicator
+        // Live Header        // Live Header "Saving... -> Ready for registration" status indicator
         let saveBadgeTimeout = null;
         function setLiveDriveSaveState(state, customText) {
             const badge = document.getElementById('liveDriveSaveBadge');
@@ -1063,131 +778,27 @@ function doGet(e) {
             } else {
                 const timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
                 icon.className = 'fa-solid fa-cloud-arrow-up text-rdgold';
-                text.textContent = customText || 'Changes saved in Drive';
+                text.textContent = customText || 'Ready for registration';
                 if (draftStatus) draftStatus.textContent = `All changes auto-saved (${timeStr})`;
             }
         }
 
-        // Auto-save form draft as consultant types so no input is ever lost
-        function getAttendeeEntries() {
-            return Array.from(document.querySelectorAll('#attendeeFields .attendee-entry')).map((entry) => ({
-                name: entry.querySelector('.attendee-name').value.trim(),
-                food: entry.querySelector('.attendee-food').value
-            }));
-        }
-
-        function renderAttendeeFields(attendees = getAttendeeEntries()) {
-            const countInput = document.getElementById('personsAttended');
-            const container = document.getElementById('attendeeFields');
-            if (!countInput || !container) return;
-            const count = Number(countInput.value);
-            if (!Number.isInteger(count) || count < 1 || count > 10000) {
-                container.innerHTML = '<p class="text-sm text-rdnavy/60">Enter the number of persons above to add attendee fields.</p>';
-                return;
-            }
-
-            container.innerHTML = Array.from({ length: count }, (_, index) => `
-                <div class="attendee-entry grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-lg border border-rdnavy/15 bg-rdnavy/5">
-                    <div>
-                        <label for="attendeeName${index}" class="block text-xs font-bold text-rdnavy mb-1">Person ${index + 1} Name <span class="text-rdmaroon">*</span></label>
-                        <input type="text" id="attendeeName${index}" class="attendee-name rd-input w-full rounded-lg px-3 py-2 text-sm" maxlength="500" required placeholder="Enter full name">
-                    </div>
-                    <div>
-                        <label for="attendeeFood${index}" class="block text-xs font-bold text-rdnavy mb-1">Person ${index + 1} Food Option <span class="text-rdmaroon">*</span></label>
-                        <select id="attendeeFood${index}" class="attendee-food rd-input w-full rounded-lg px-3 py-2 text-sm" required>
-                            <option value="">Select food option</option>
-                            <option value="Veg">Veg</option>
-                            <option value="Non Veg">Non Veg</option>
-                        </select>
-                    </div>
-                </div>
-            `).join('');
-
-            Array.from(container.querySelectorAll('.attendee-entry')).forEach((entry, index) => {
-                entry.querySelector('.attendee-name').value = attendees[index]?.name || '';
-                entry.querySelector('.attendee-food').value = attendees[index]?.food || '';
-            });
-        }
-
+        // Save student form drafts on this device.
         function setupFormLiveDraftAutoSave() {
-            const form = document.getElementById('consultancyForm');
-            if (!form) return;
-
-            // Restore draft if available
-            try {
-                const rawDraft = localStorage.getItem(STORAGE_FORM_DRAFT_KEY);
-                if (rawDraft) {
-                    const draft = JSON.parse(rawDraft);
-                    ['consultancyName', 'consultantName', 'consultancyAddress', 'contactNumber', 'consultancyRequirements', 'emailAddress', 'civilServiceInterest'].forEach(fieldId => {
-                        const el = document.getElementById(fieldId);
-                        if (el && draft[fieldId]) el.value = draft[fieldId];
-                    });
-                }
-            } catch (e) {}
-
-            // Save on every input change
-            const saveDraft = function() {
-                setLiveDriveSaveState('saving', 'Auto-saving draft...');
-                try {
-                    const draftObj = {
-                        consultancyName: document.getElementById('consultancyName')?.value || '',
-                        consultantName: document.getElementById('consultantName')?.value || '',
-                        consultancyAddress: document.getElementById('consultancyAddress')?.value || '',
-                        contactNumber: document.getElementById('contactNumber')?.value || '',
-                        consultancyRequirements: document.getElementById('consultancyRequirements')?.value || '',
-                        emailAddress: document.getElementById('emailAddress')?.value || '',
-                        civilServiceInterest: document.getElementById('civilServiceInterest')?.value || '',
-                        updatedAt: new Date().toISOString()
-                    };
-                    localStorage.setItem(STORAGE_FORM_DRAFT_KEY, JSON.stringify(draftObj));
-                } catch (e) {}
-                saveBadgeTimeout = setTimeout(() => {
-                    setLiveDriveSaveState('saved', 'Changes saved in Drive');
-                }, 450);
-            };
-            form.addEventListener('input', saveDraft);
-            form.addEventListener('change', saveDraft);
+            const form=document.getElementById('studentRegistrationForm'); if(!form)return;
+            const fieldIds=['studentName','schoolName','district','className','parentName','parentPhone','parentEmail','interest','message','civilServiceInterested'];
+            try { const draft=JSON.parse(localStorage.getItem(STORAGE_FORM_DRAFT_KEY)||'{}'); fieldIds.forEach((id)=>{const el=document.getElementById(id);if(el&&typeof draft[id]==='string')el.value=draft[id];}); } catch(error) {}
+            const saveDraft=()=>{try{const draft={};fieldIds.forEach((id)=>draft[id]=document.getElementById(id)?.value||'');draft.updatedAt=new Date().toISOString();localStorage.setItem(STORAGE_FORM_DRAFT_KEY,JSON.stringify(draft));}catch(error){} setLiveDriveSaveState('saved','Draft saved on this device');};
+            form.addEventListener('input',saveDraft);form.addEventListener('change',saveDraft);
         }
 
-        // Automatic background email dispatch to rdccpscollege@gmail.com & rdccpcollege@gmail.com
-        // Works from Google Sites & mobile browsers even if Apps Script hasn't been linked yet
-        async function sendZeroConfigAutoEmail(entry) {
-            const endpoints = [
-                'https://formsubmit.co/ajax/rdccpscollege@gmail.com',
-                'https://formsubmit.co/ajax/rdccpcollege@gmail.com'
-            ];
-            const payload = {
-                _subject: `RDCCPS "KUDIMAIPANIYATRUPADAI": ${entry.consultancyName}`,
-                _template: 'table',
-                _captcha: 'false',
-                '1_Consultancy_Name': entry.consultancyName,
-                '2_Consultant_Name': entry.consultantName,
-                '3_Consultancy_Address': entry.consultancyAddress,
-                '4_Contact_Number': entry.contactNumber,
-                '5_Food_Options': entry.foodOptions,
-                '6_Consultancy_Requirements': entry.consultancyRequirements,
-                '7_Required_Brochure': entry.requiredBrochure,
-                '8_Brochure_Printing_Contact': entry.brochureContactNumber,
-                '9_Persons_Attended': entry.personsAttended,
-                'Submitted_Time': entry.submittedReadable
-            };
-            for (const url of endpoints) {
-                try {
-                    fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        body: JSON.stringify(payload)
-                    }).catch(() => {});
-                } catch (e) {}
-            }
-        }
-
-        // IMPORTANT: Hardcoded / Pre-configured Google Apps Script Web App URL
+        // Student submissions are saved by the Netlify Functions backend.
+        // IMPORTANT: Hardcoded / Pre-configured Apps Script Web App URL
         // When you click "Copy Google Sites Embed Code", this constant is automatically filled in the HTML!
         const DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL = "";
         const DEFAULT_EMBEDDED_GOOGLE_SHEET_VIEW_URL = "";
 
-        // Default or URL-passed Google Apps Script Web App URL for Google Drive Excel Auto-Sync
+        // Default or URL-passed Apps Script Web App URL for Google Sheets Auto-Sync
         let googleScriptWebAppUrl = DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL;
         let googleSheetViewUrl = DEFAULT_EMBEDDED_GOOGLE_SHEET_VIEW_URL;
         let customQrLinkOverride = "";
@@ -1761,7 +1372,7 @@ function doGet(e) {
         let syncChannel = null;
         try {
             if (typeof BroadcastChannel !== 'undefined') {
-                syncChannel = new BroadcastChannel('rdccps_consultancy_meet_2027_sync');
+                syncChannel = new BroadcastChannel('rdccps_school_student_registration_2027_sync');
                 syncChannel.onmessage = function(ev) {
                     if (ev.data && ev.data.type === 'NEW_SUBMISSION' && ev.data.entry) {
                         mergeSubmissionEntry(ev.data.entry);
@@ -1774,7 +1385,7 @@ function doGet(e) {
         } catch (e) {}
 
         function mergeSubmissionEntry(entry) {
-            if (!entry || !entry.id) return;
+            if (!entry || !entry.id || !entry.studentName) return;
             if (deletedSubmissionIds.has(String(entry.id))) return;
             const existingIdx = allSubmissions.findIndex(s => s.id === entry.id);
             if (existingIdx >= 0) {
@@ -1810,7 +1421,7 @@ function doGet(e) {
             sources.forEach(list => {
                 if (Array.isArray(list)) {
                     list.forEach(item => {
-                        if (item && item.id && !deletedSubmissionIds.has(String(item.id))) {
+                        if (item && item.id && item.studentName && !deletedSubmissionIds.has(String(item.id))) {
                             const idx = allSubmissions.findIndex(s => String(s.id) === String(item.id));
                             if (idx >= 0) {
                                 allSubmissions[idx] = item;
@@ -2096,7 +1707,7 @@ function doGet(e) {
             updateQrModeBadge();
             renderCustomQRCode();
             saveBadgeTimeout = setTimeout(() => {
-                setLiveDriveSaveState('saved', 'Changes saved in Drive');
+                setLiveDriveSaveState('saved', 'Ready for registration');
             }, 500);
         };
 
@@ -2124,7 +1735,7 @@ function doGet(e) {
             renderCustomQRCode();
             const status = document.getElementById('qrCopyStatus');
             if (status) {
-                status.textContent = 'Custom QR Code generated and saved! Consultancies scanning this QR will open your custom link.';
+                status.textContent = 'Custom QR Code generated and saved! Students and Families scanning this QR will open your custom link.';
                 status.classList.remove('hidden');
                 setTimeout(() => status.classList.add('hidden'), 4500);
             }
@@ -2251,26 +1862,26 @@ function doGet(e) {
             const qrCanvas = document.getElementById('qrCanvas');
             if (!qrCanvas) return;
             const link = document.createElement('a');
-            link.download = 'RDCCPS_Consultancy_Meet_Admission_2027_2028_QR.png';
+            link.download = 'RDCCPS_School_Student_Registration_QR.png';
             link.href = qrCanvas.toDataURL('image/png');
             link.click();
         };
 
-        // Copy Form Link for Consultancies
-        window.copyFormLinkForConsultancy = function() {
+        // Copy Form Link for Students and Families
+        window.copyStudentFormLink = function() {
             const urlInput = document.getElementById('qrUrlInput');
             if (!urlInput) return;
             urlInput.select();
             document.execCommand('copy');
             const status = document.getElementById('qrCopyStatus');
             if (status) {
-                status.textContent = 'Form link copied! You can now share it or send the downloaded QR image to consultancies.';
+                status.textContent = 'Form link copied! You can now share it or send the downloaded QR image to students and families.';
                 status.classList.remove('hidden');
                 setTimeout(() => status.classList.add('hidden'), 4000);
             }
         };
 
-        // Share Form Link on WhatsApp to Consultancies
+        // Share Form Link on WhatsApp to Students and Families
         window.shareQrLinkOnWhatsApp = function() {
             const targetUrl = document.getElementById('qrUrlInput')?.value || window.location.href;
             const msg = encodeURIComponent(
@@ -2343,7 +1954,7 @@ function doGet(e) {
             pctx.fillText('Email: rdccpscollege@gmail.com', 450, 1222);
 
             const link = document.createElement('a');
-            link.download = 'RDCCPS_Consultancy_Meet_Admission_2027_2028_Poster.png';
+            link.download = 'RDCCPS_School_Student_Registration_Poster.png';
             link.href = poster.toDataURL('image/png');
             link.click();
         };
@@ -2432,7 +2043,7 @@ function doGet(e) {
                     logoDataUrl: currentLogoDataUrl
                 });
             }
-            setLiveDriveSaveState('saved', 'Changes saved in Drive');
+            setLiveDriveSaveState('saved', 'Ready for registration');
         }
 
         function persistSubmissionsLocally() {
@@ -2546,638 +2157,25 @@ function doGet(e) {
             }
             renderCustomQRCode();
             updateDriveUIStatus();
-            setLiveDriveSaveState('saved', 'Changes saved in Drive');
+            setLiveDriveSaveState('saved', 'Ready for registration');
             showDriveModalMessage('Saved! All changes are automatically synced to the cloud & Drive.');
         };
 
-        window.copyAppsScriptCode = function() {
-            const area = document.getElementById('appsScriptCodeArea');
-            if (!area) return;
-            area.select();
-            document.execCommand('copy');
-            showDriveModalMessage('Google Apps Script code copied! Paste it in Extensions -> Apps Script inside your Google Sheet.');
-        };
-
-        // Generates a complete self-contained HTML embed code with the user's Google Sheet Web App URL
-        // permanently baked into DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL so every visitor on Google Sites
-        // automatically writes to and reads from the same Google Sheet!
-        window.copyGoogleSitesEmbedCode = function() {
-            saveGoogleDriveConfig();
-            if (!googleScriptWebAppUrl) {
-                showDriveModalMessage('Please paste your Google Sheet Apps Script Web App URL in Box 1 first, then click this button.', true);
-                return;
-            }
-            let fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-            fullHtml = fullHtml.replace(
-                /const DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL = "[^"]*";/,
-                `const DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL = "${googleScriptWebAppUrl.replace(/"/g, '\\"')}";`
-            );
-            fullHtml = fullHtml.replace(
-                /const DEFAULT_EMBEDDED_GOOGLE_SHEET_VIEW_URL = "[^"]*";/,
-                `const DEFAULT_EMBEDDED_GOOGLE_SHEET_VIEW_URL = "${(googleSheetViewUrl || '').replace(/"/g, '\\"')}";`
-            );
-
-            const tempArea = document.createElement('textarea');
-            tempArea.value = fullHtml;
-            document.body.appendChild(tempArea);
-            tempArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempArea);
-
-            showDriveModalMessage('COPIED! Full Google Sites HTML Embed Code (with your Google Sheet URL permanently baked in) is copied. Paste this into Google Sites -> Embed -> Embed Code!');
-        };
-
-        // 1-Click Clean Google Sites Embed Code Generator (Works from Top Admin Bar & Responses Tab)
-        // Ensures the copied embed code always opens in Public Form View by default for visitors
-        // while keeping your Google Sheet URL, Custom QR URL, and Global Cloud Relay pre-linked!
-        window.copyCleanGoogleSitesEmbedCode = function() {
-            const clone = document.documentElement.cloneNode(true);
-
-            // Ensure the cloned HTML starts in Public Consultant Form view (not pre-unlocked as Admin)
-            const adminBar = clone.querySelector('#adminToolbar');
-            if (adminBar) {
-                adminBar.classList.add('hidden');
-                adminBar.classList.remove('flex');
-            }
-            const pubBadge = clone.querySelector('#publicHeaderBadge');
-            if (pubBadge) pubBadge.classList.remove('hidden');
-
-            const vForm = clone.querySelector('#viewForm');
-            const vQr = clone.querySelector('#viewQr');
-            const vAdmin = clone.querySelector('#viewAdmin');
-            if (vForm) vForm.classList.remove('hidden');
-            if (vQr) vQr.classList.add('hidden');
-            if (vAdmin) vAdmin.classList.add('hidden');
-
-            ['#adminLoginModal', '#brandingModal', '#successModal', '#driveSetupModal', '#deleteConfirmModal', '#manualImportModal'].forEach(sel => {
-                const m = clone.querySelector(sel);
-                if (m) {
-                    m.classList.add('hidden');
-                    m.classList.remove('flex');
-                }
-            });
-
-            let fullHtml = '<!DOCTYPE html>\n' + clone.outerHTML;
-            if (googleScriptWebAppUrl) {
-                fullHtml = fullHtml.replace(
-                    /const DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL = "[^"]*";/,
-                    `const DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL = "${googleScriptWebAppUrl.replace(/"/g, '\\"')}";`
-                );
-            }
-            if (googleSheetViewUrl) {
-                fullHtml = fullHtml.replace(
-                    /const DEFAULT_EMBEDDED_GOOGLE_SHEET_VIEW_URL = "[^"]*";/,
-                    `const DEFAULT_EMBEDDED_GOOGLE_SHEET_VIEW_URL = "${googleSheetViewUrl.replace(/"/g, '\\"')}";`
-                );
-            }
-
-            const tempArea = document.createElement('textarea');
-            tempArea.value = fullHtml;
-            document.body.appendChild(tempArea);
-            tempArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempArea);
-
-            setLiveDriveSaveState('saved', 'Embed Code Copied!');
-            showFeedback('Google Sites Embed Code copied to clipboard! Paste it into Google Sites -> Embed -> Embed Code and click Publish.');
-        };
-
-        // Multi-transport Google Drive Sheet sender:
-        // Uses 4 simultaneous delivery methods (Hidden Form POST, fetch POST, Image beacon, and JSONP script tag)
-        // so that Google Sites sandboxed iframes and mobile phones NEVER fail to write to the Google Sheet.
-        async function sendEntryToGoogleDriveSheet(entry) {
-            if (!googleScriptWebAppUrl) return false;
-            const payloadStr = JSON.stringify(entry);
-            const actionType = entry.action || 'add';
-
-            // Method 1: Hidden HTML <form target="rdccps_hidden_gsheet_iframe" method="POST">
-            // This is the #1 most reliable way to bypass Google Sites iframe CORS restrictions.
-            try {
-                const hiddenForm = document.createElement('form');
-                hiddenForm.method = 'POST';
-                hiddenForm.action = googleScriptWebAppUrl;
-                hiddenForm.target = 'rdccps_hidden_gsheet_iframe';
-                hiddenForm.style.display = 'none';
-
-                const inputAction = document.createElement('input');
-                inputAction.type = 'hidden';
-                inputAction.name = 'action';
-                inputAction.value = actionType;
-                hiddenForm.appendChild(inputAction);
-
-                const inputPayload = document.createElement('input');
-                inputPayload.type = 'hidden';
-                inputPayload.name = 'payload';
-                inputPayload.value = payloadStr;
-                hiddenForm.appendChild(inputPayload);
-
-                document.body.appendChild(hiddenForm);
-                hiddenForm.submit();
-                setTimeout(() => {
-                    if (hiddenForm.parentNode) hiddenForm.parentNode.removeChild(hiddenForm);
-                }, 2000);
-            } catch (err) {}
-
-            // Method 2: Standard POST with application/x-www-form-urlencoded (no-cors)
-            try {
-                const formBody = new URLSearchParams();
-                formBody.append('action', actionType);
-                formBody.append('payload', payloadStr);
-                fetch(googleScriptWebAppUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formBody.toString()
-                }).catch(() => {});
-            } catch (err) {}
-
-            // Method 3: JSONP / GET Query Parameter fallback
-            return new Promise((resolve) => {
-                try {
-                    const cbName = 'rdccps_gs_cb_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
-                    const sep = googleScriptWebAppUrl.includes('?') ? '&' : '?';
-                    const scriptUrl = `${googleScriptWebAppUrl}${sep}action=${encodeURIComponent(actionType)}&payload=${encodeURIComponent(payloadStr)}&callback=${cbName}&_t=${Date.now()}`;
-
-                    const scriptEl = document.createElement('script');
-                    let settled = false;
-
-                    window[cbName] = function() {
-                        settled = true;
-                        delete window[cbName];
-                        if (scriptEl.parentNode) scriptEl.parentNode.removeChild(scriptEl);
-                        resolve(true);
-                    };
-
-                    scriptEl.onerror = function() {
-                        if (!settled) {
-                            settled = true;
-                            delete window[cbName];
-                            if (scriptEl.parentNode) scriptEl.parentNode.removeChild(scriptEl);
-                            resolve(true);
-                        }
-                    };
-
-                    scriptEl.src = scriptUrl;
-                    document.body.appendChild(scriptEl);
-
-                    setTimeout(() => {
-                        if (!settled) {
-                            settled = true;
-                            delete window[cbName];
-                            if (scriptEl.parentNode) scriptEl.parentNode.removeChild(scriptEl);
-                            resolve(true);
-                        }
-                    }, 3000);
-                } catch (err) {
-                    resolve(false);
-                }
-            });
-        }
-
-        window.testGoogleDriveSync = async function() {
-            saveGoogleDriveConfig();
-            if (!googleScriptWebAppUrl) {
-                showDriveModalMessage('Please paste your Google Sheet Apps Script Web App URL in Box 1 first.', true);
-                return;
-            }
-            showDriveModalMessage('Sending test consultancy row to your Google Drive Sheet...');
-            const sampleEntry = {
-                id: 'test_' + Date.now(),
-                consultancyName: 'Sample Test Consultancy (RDCCPS)',
-                consultantName: 'Test Consultant',
-                consultancyAddress: 'Coimbatore, Tamil Nadu',
-                contactNumber: '+91 9787523888',
-                foodOptions: 'Veg',
-                consultancyRequirements: 'Admission 2027-2028 Partner Tie-up',
-                requiredBrochure: 'Yes - 25 Copies',
-                personsAttended: '2',
-                submittedAt: new Date().toISOString(),
-                submittedReadable: new Date().toLocaleString('en-IN')
-            };
-            mergeSubmissionEntry(sampleEntry);
-            if (typeof window.saveSubmissionToCloud === 'function') {
-                await window.saveSubmissionToCloud(sampleEntry);
-            }
-            await sendEntryToGoogleDriveSheet(sampleEntry);
-            showDriveModalMessage('Test row sent! Check your Google Sheet in Google Drive and the Admin Responses table.');
-        };
-
-        // Fetch rows from Google Sheet using both fetch() and JSONP fallback (works inside Google Sites embeds)
-        window.fetchFromGoogleSheet = async function(silent = false) {
-            if (!googleScriptWebAppUrl) {
-                if (!silent) showDriveModalMessage('Please paste your Google Sheet Apps Script Web App URL first.', true);
-                return;
-            }
-            if (!silent) showDriveModalMessage('Fetching rows from your Google Drive Sheet...');
-
-            // Try standard JSON fetch first
-            try {
-                const sep = googleScriptWebAppUrl.includes('?') ? '&' : '?';
-                const res = await fetch(`${googleScriptWebAppUrl}${sep}_t=${Date.now()}`);
-                const data = await res.json();
-                if (data && Array.isArray(data.rows)) {
-                    data.rows.forEach(r => mergeSubmissionEntry(r));
-                    renderSubmissionsTable();
-                    if (!silent) showDriveModalMessage(`Synced ${data.rows.length} row(s) from your Google Drive Excel Sheet!`);
-                    return;
-                }
-            } catch (err) {}
-
-            // Fallback to JSONP script loader (bypasses CORS inside Google Sites iframe)
-            try {
-                const cbName = 'rdccps_pull_cb_' + Date.now();
-                const sep = googleScriptWebAppUrl.includes('?') ? '&' : '?';
-                const scriptEl = document.createElement('script');
-                window[cbName] = function(data) {
-                    delete window[cbName];
-                    if (scriptEl.parentNode) scriptEl.parentNode.removeChild(scriptEl);
-                    if (data && Array.isArray(data.rows)) {
-                        data.rows.forEach(r => mergeSubmissionEntry(r));
-                        renderSubmissionsTable();
-                        if (!silent) showDriveModalMessage(`Synced ${data.rows.length} row(s) from your Google Drive Excel Sheet!`);
-                    }
-                };
-                scriptEl.onerror = function() {
-                    delete window[cbName];
-                    if (scriptEl.parentNode) scriptEl.parentNode.removeChild(scriptEl);
-                    if (!silent) showDriveModalMessage('Make sure you deployed the updated Apps Script with "Who has access: Anyone".', true);
-                };
-                scriptEl.src = `${googleScriptWebAppUrl}${sep}callback=${cbName}&_t=${Date.now()}`;
-                document.body.appendChild(scriptEl);
-            } catch (err) {
-                if (!silent) showDriveModalMessage('Could not pull rows. Please check your Web App URL.', true);
-            }
-        };
-
-        // ---------------------------------------------------------
-        // 5B. GOOGLE DRIVE & GOOGLE SHEETS (EXCEL) LIVE AUTO-SYNC
-        // ---------------------------------------------------------
-        function sanitizeScriptUrl(rawUrl) {
-            if (!rawUrl) return '';
-            let u = String(rawUrl).trim();
-            // Extract URL if user accidentally pasted surrounding text
-            const match = u.match(/https:\/\/script\.google\.com\/macros\/s\/[a-zA-Z0-9_-]+\/(?:exec|dev)/i);
-            if (match && match[0]) {
-                return match[0];
-            }
-            return u;
-        }
-
-        function loadGoogleDriveConfig() {
-            if (DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL && !googleScriptWebAppUrl) {
-                googleScriptWebAppUrl = sanitizeScriptUrl(DEFAULT_EMBEDDED_GOOGLE_SCRIPT_URL);
-            }
-            if (DEFAULT_EMBEDDED_GOOGLE_SHEET_VIEW_URL && !googleSheetViewUrl) {
-                googleSheetViewUrl = DEFAULT_EMBEDDED_GOOGLE_SHEET_VIEW_URL;
-            }
-
-            // 1. Check URL query parameter ?gsheet=... (so QR code scans automatically inherit the Google Sheet link)
-            try {
-                const params = new URLSearchParams(window.location.search);
-                const gsheetParam = params.get('gsheet');
-                if (gsheetParam && gsheetParam.includes('script.google.com')) {
-                    googleScriptWebAppUrl = sanitizeScriptUrl(gsheetParam);
-                }
-            } catch (e) {}
-
-            // 2. Check saved config in localStorage, sessionStorage, and window.name (for sandboxed iframes)
-            const configSources = [];
-            try {
-                const rawLocal = localStorage.getItem(STORAGE_DRIVE_CONFIG_KEY);
-                if (rawLocal) configSources.push(JSON.parse(rawLocal));
-            } catch (e) {}
-            try {
-                const rawSession = sessionStorage.getItem(STORAGE_DRIVE_CONFIG_KEY);
-                if (rawSession) configSources.push(JSON.parse(rawSession));
-            } catch (e) {}
-            try {
-                if (window.name && window.name.startsWith('{')) {
-                    const wn = JSON.parse(window.name);
-                    if (wn && wn.rdccps_drive_cfg) configSources.push(wn.rdccps_drive_cfg);
-                }
-            } catch (e) {}
-
-            configSources.forEach(cfg => {
-                if (cfg && cfg.scriptUrl && !googleScriptWebAppUrl) {
-                    googleScriptWebAppUrl = sanitizeScriptUrl(cfg.scriptUrl);
-                }
-                if (cfg && cfg.sheetViewUrl && !googleSheetViewUrl) {
-                    googleSheetViewUrl = String(cfg.sheetViewUrl).trim();
-                }
-            });
-
-            updateDriveUIStatus();
-        }
-
-        function updateDriveUIStatus() {
-            const scriptInput = document.getElementById('googleScriptUrlInput');
-            const viewInput = document.getElementById('googleSheetViewUrlInput');
-            if (scriptInput && document.activeElement !== scriptInput) {
-                scriptInput.value = googleScriptWebAppUrl || '';
-            }
-            if (viewInput && document.activeElement !== viewInput) {
-                viewInput.value = googleSheetViewUrl || '';
-            }
-
-            const pill = document.getElementById('driveStatusPill');
-            const openBtn = document.getElementById('openConnectedSheetBtn');
-            const formBadge = document.getElementById('formSyncStatusBadge');
-            const previewBox = document.getElementById('savedDriveUrlPreviewBox');
-            const previewText = document.getElementById('savedDriveUrlText');
-            const modalBadge = document.getElementById('modalScriptStatusBadge');
-
-            if (googleScriptWebAppUrl) {
-                if (pill) {
-                    pill.textContent = 'Google Sheets API Active';
-                    pill.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rdmaroon text-rdgold';
-                }
-                if (formBadge) {
-                    formBadge.innerHTML = `<i class="fa-brands fa-google-drive text-rdmaroon"></i> <span>Google Sheets Auto-Save Active</span>`;
-                }
-                if (previewBox && previewText) {
-                    previewBox.classList.remove('hidden');
-                    previewText.textContent = googleScriptWebAppUrl;
-                }
-                if (modalBadge) {
-                    modalBadge.textContent = 'Link Saved & Active';
-                    modalBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rdmaroon text-rdgold';
-                }
-            } else {
-                if (pill) {
-                    pill.textContent = 'Google Sheets API Active';
-                    pill.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rdgold/50 text-rdnavy';
-                }
-                if (previewBox) {
-                    previewBox.classList.add('hidden');
-                }
-                if (modalBadge) {
-                    modalBadge.textContent = 'Paste & Auto-Saves Instantly';
-                    modalBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rdgold/40 text-rdnavy';
-                }
-            }
-
-            if (openBtn) {
-                if (googleSheetViewUrl) {
-                    openBtn.href = googleSheetViewUrl;
-                    openBtn.classList.remove('hidden');
-                    openBtn.classList.add('inline-flex');
-                } else {
-                    openBtn.classList.add('hidden');
-                    openBtn.classList.remove('inline-flex');
-                }
-            }
-        }
-
-        // Instant Auto-Save as soon as the user pastes or types the Deploy Link
-        let driveAutoSaveTimer = null;
-        window.autoSaveDriveUrlOnInput = function() {
-            const rawScriptVal = document.getElementById('googleScriptUrlInput')?.value || '';
-            const rawSheetVal = document.getElementById('googleSheetViewUrlInput')?.value || '';
-            const cleanedScriptUrl = sanitizeScriptUrl(rawScriptVal);
-
-            googleScriptWebAppUrl = cleanedScriptUrl;
-            googleSheetViewUrl = rawSheetVal.trim();
-
-            setLiveDriveSaveState('saving', 'Auto-saving deploy link...');
-            persistDriveConfigEverywhere(googleScriptWebAppUrl, googleSheetViewUrl);
-            updateDriveUIStatus();
-
-            const urlInput = document.getElementById('qrUrlInput');
-            if (urlInput && !customQrLinkOverride) {
-                urlInput.value = buildShareableFormUrlWithDriveSync();
-                urlInput.dataset.autoGenerated = 'true';
-            }
-            renderCustomQRCode();
-
-            if (driveAutoSaveTimer) clearTimeout(driveAutoSaveTimer);
-            driveAutoSaveTimer = setTimeout(() => {
-                setLiveDriveSaveState('saved', 'Deploy link saved in Drive');
-                if (googleScriptWebAppUrl && googleScriptWebAppUrl.startsWith('https://script.google.com/')) {
-                    showDriveModalMessage('Deploy link auto-saved! Connecting and fetching live responses from your Google Drive Sheet...');
-                    fetchFromGoogleSheet(false);
-                }
-            }, 400);
-        };
-
-        window.toggleDriveSetupModal = function(show) {
-            if (show && !isAdminAuthenticated) {
-                toggleAdminLoginModal(true);
-                return;
-            }
-            const modal = document.getElementById('driveSetupModal');
-            if (!modal) return;
-            if (show) {
-                loadGoogleDriveConfig();
-                updateDriveUIStatus();
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            } else {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        };
-
-        function showDriveModalMessage(msg, isError = false) {
-            const box = document.getElementById('driveModalFeedback');
-            if (!box) return;
-            box.classList.remove('hidden');
-            box.className = isError
-                ? 'rounded-lg p-3 text-xs font-bold bg-rdmaroon text-rdgold'
-                : 'rounded-lg p-3 text-xs font-bold bg-rdnavy text-rdgold';
-            box.textContent = msg;
-        }
-
-        window.saveGoogleDriveConfig = async function(runImmediateFetch = false) {
-            setLiveDriveSaveState('saving', 'Saving Drive sync...');
-            const rawScriptUrl = (document.getElementById('googleScriptUrlInput')?.value || '').trim();
-            const sheetViewUrl = (document.getElementById('googleSheetViewUrlInput')?.value || '').trim();
-
-            googleScriptWebAppUrl = sanitizeScriptUrl(rawScriptUrl);
-            googleSheetViewUrl = sheetViewUrl;
-
-            const scriptInput = document.getElementById('googleScriptUrlInput');
-            if (scriptInput && googleScriptWebAppUrl) {
-                scriptInput.value = googleScriptWebAppUrl;
-            }
-
-            persistDriveConfigEverywhere(googleScriptWebAppUrl, googleSheetViewUrl);
-
-            const urlInput = document.getElementById('qrUrlInput');
-            if (urlInput && !customQrLinkOverride) {
-                urlInput.value = buildShareableFormUrlWithDriveSync();
-                urlInput.dataset.autoGenerated = 'true';
-            }
-            renderCustomQRCode();
-            updateDriveUIStatus();
-            setLiveDriveSaveState('saved', 'Changes saved in Drive');
-
-            if (!googleScriptWebAppUrl) {
-                showDriveModalMessage('Cleared Google Sheet Web App URL.', true);
-                return;
-            }
-
-            showDriveModalMessage('Deployment URL Saved! Verifying live connection & syncing existing responses with your Google Drive Sheet...');
-            if (runImmediateFetch) {
-                // Push any local unsynced responses to the newly connected Google Sheet & pull all existing rows
-                for (const existingItem of allSubmissions) {
-                    sendEntryToGoogleDriveSheet(existingItem);
-                }
-                await fetchFromGoogleSheet(false);
-            }
-        };
-
-        window.processManualImportText = async function() {
-            const rawText = (document.getElementById('manualImportTextarea')?.value || '').trim();
-            const fb = document.getElementById('manualImportFeedback');
-            if (!rawText) return;
-
-            let importedCount = 0;
-
-            // Check if JSON array or object
-            if (rawText.startsWith('[') || rawText.startsWith('{')) {
-                try {
-                    const parsed = JSON.parse(rawText);
-                    const arr = Array.isArray(parsed) ? parsed : [parsed];
-                    for (const item of arr) {
-                        const entry = {
-                            id: item.id || ('imp_' + Date.now() + '_' + Math.floor(Math.random() * 1000)),
-                            consultancyName: item.consultancyName || 'Imported Consultancy',
-                            consultantName: item.consultantName || '',
-                            consultancyAddress: item.consultancyAddress || '',
-                            contactNumber: item.contactNumber || '',
-                            foodOptions: item.foodOptions || 'Veg',
-                            consultancyRequirements: item.consultancyRequirements || '',
-                            requiredBrochure: item.requiredBrochure || '',
-                            brochureContactNumber: item.brochureContactNumber || '',
-                            personsAttended: String(item.personsAttended || '1'),
-                            submittedAt: item.submittedAt || new Date().toISOString(),
-                            submittedReadable: item.submittedReadable || new Date().toLocaleString('en-IN')
-                        };
-                        mergeSubmissionEntry(entry);
-                        if (typeof window.saveSubmissionToCloud === 'function') {
-                            await window.saveSubmissionToCloud(entry);
-                        }
-                        if (googleScriptWebAppUrl) {
-                            await sendEntryToGoogleDriveSheet(entry);
-                        }
-                        importedCount++;
-                    }
-                } catch (e) {}
-            } else {
-                // Parse WhatsApp / Email receipt text format
-                const extractField = (labelRegex) => {
-                    const m = rawText.match(labelRegex);
-                    return m && m[1] ? m[1].trim() : '';
-                };
-                const consultancyName = extractField(/1\.\s*Consultancy Name:\s*(.+)/i);
-                const consultantName = extractField(/2\.\s*Consultant Name:\s*(.+)/i);
-                const consultancyAddress = extractField(/3\.\s*(?:Consultancy\s*)?Address:\s*(.+)/i);
-                const contactNumber = extractField(/4\.\s*Contact Number:\s*(.+)/i);
-                const foodOptions = extractField(/5\.\s*Food Options:\s*(.+)/i) || 'Veg';
-                const consultancyRequirements = extractField(/6\.\s*(?:Consultancy's\s*)?Requirements:\s*(.+)/i);
-                const requiredBrochure = extractField(/7\.\s*Required Brochure:\s*(.+)/i);
-                const brochureContactNumber = extractField(/8\.\s*(?:Brochure Printing )?Contact Number[^:]*:\s*(.+)/i);
-                const personsAttended = extractField(/9\.\s*Number Of Persons[^:]*:\s*(.+)/i) || extractField(/8\.\s*Number Of Persons[^:]*:\s*(.+)/i) || '1';
-
-                if (consultancyName || consultantName || contactNumber) {
-                    const entry = {
-                        id: 'imp_' + Date.now(),
-                        consultancyName: consultancyName || 'Imported Consultancy',
-                        consultantName,
-                        consultancyAddress,
-                        contactNumber,
-                        foodOptions,
-                        consultancyRequirements,
-                        requiredBrochure,
-                        brochureContactNumber,
-                        personsAttended,
-                        submittedAt: new Date().toISOString(),
-                        submittedReadable: new Date().toLocaleString('en-IN')
-                    };
-                    mergeSubmissionEntry(entry);
-                    if (typeof window.saveSubmissionToCloud === 'function') {
-                        await window.saveSubmissionToCloud(entry);
-                    }
-                    if (googleScriptWebAppUrl) {
-                        await sendEntryToGoogleDriveSheet(entry);
-                    }
-                    importedCount = 1;
-                }
-            }
-
-            if (importedCount > 0) {
-                await pushStateToGlobalCloudRelay();
-            }
-
-            if (fb) {
-                fb.classList.remove('hidden');
-                if (importedCount > 0) {
-                    fb.className = 'rounded-lg p-2.5 text-xs font-bold bg-rdnavy text-rdgold';
-                    fb.textContent = `Successfully imported ${importedCount} form response(s) into Admin Portal & Drive!`;
-                    document.getElementById('manualImportTextarea').value = '';
-                } else {
-                    fb.className = 'rounded-lg p-2.5 text-xs font-bold bg-rdmaroon text-rdgold';
-                    fb.textContent = 'Could not parse text. Make sure it includes "1. Consultancy Name: ...".';
-                }
-            }
-        };
-
-        // Fetch rows from Google Sheet using both fetch() and JSONP fallback (works inside Google Sites embeds)
-        window.fetchFromGoogleSheet = async function(silent = false) {
-            if (!googleScriptWebAppUrl) {
-                if (!silent) showDriveModalMessage('Please paste your Google Sheet Apps Script Web App URL first.', true);
-                return;
-            }
-            if (!silent) showDriveModalMessage('Connecting & fetching rows from your Google Drive Sheet...');
-
-            function applyFetchedSheetData(data) {
-                if (!data) return false;
-                // Automatically capture the Google Drive Sheet URL returned by the Apps Script!
-                if (data.sheetUrl && !googleSheetViewUrl) {
-                    googleSheetViewUrl = data.sheetUrl;
-                    persistDriveConfigEverywhere(googleScriptWebAppUrl, googleSheetViewUrl);
-                    updateDriveUIStatus();
-                }
-                if (Array.isArray(data.rows)) {
-                    data.rows.forEach(r => mergeSubmissionEntry(r));
-                    renderSubmissionsTable();
-                    if (!silent) {
-                        showDriveModalMessage(`Connected & Auto-Saved! Synced ${data.rows.length} response(s) from your Google Drive Excel Sheet.`);
-                    }
-                    return true;
-                }
-                return false;
-            }
-
-            // Try standard JSON fetch first
-            try {
-                const sep = googleScriptWebAppUrl.includes('?') ? '&' : '?';
-                const res = await fetch(`${googleScriptWebAppUrl}${sep}_t=${Date.now()}`);
-                const data = await res.json();
-                if (applyFetchedSheetData(data)) return;
-            } catch (err) {}
-
-            // Fallback to JSONP script loader (bypasses CORS inside Google Sites iframe)
-            try {
-                const cbName = 'rdccps_pull_cb_' + Date.now();
-                const sep = googleScriptWebAppUrl.includes('?') ? '&' : '?';
-                const scriptEl = document.createElement('script');
-                window[cbName] = function(data) {
-                    delete window[cbName];
-                    if (scriptEl.parentNode) scriptEl.parentNode.removeChild(scriptEl);
-                    applyFetchedSheetData(data);
-                };
-                scriptEl.onerror = function() {
-                    delete window[cbName];
-                    if (scriptEl.parentNode) scriptEl.parentNode.removeChild(scriptEl);
-                    if (!silent) showDriveModalMessage('Link is saved! Make sure your Apps Script deployment has "Who has access: Anyone".', true);
-                };
-                scriptEl.src = `${googleScriptWebAppUrl}${sep}callback=${cbName}&_t=${Date.now()}`;
-                document.body.appendChild(scriptEl);
-            } catch (err) {
-                if (!silent) showDriveModalMessage('Could not pull rows. Please check your Web App URL.', true);
-            }
-        };
+        async function copyTextToClipboard(value){try{await navigator.clipboard.writeText(value);}catch(error){const a=document.createElement('textarea');a.value=value;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();}}
+        window.copyCleanGoogleSitesEmbedCode=async function(){await copyTextToClipboard(`<iframe src="${window.location.origin}" title="RDCCPS Student Registration" width="100%" height="900" style="border:0"></iframe>`);showFeedback('Hosted student form embed code copied.',false);};
+        window.copyGoogleSitesEmbedCode=window.copyCleanGoogleSitesEmbedCode;
+        window.copyAppsScriptCode=function(){showFeedback('Apps Script is not used. Netlify saves responses to the School Students worksheet.',false);};
+        window.toggleDriveSetupModal=function(show){const modal=document.getElementById('driveSetupModal');if(modal){modal.classList.toggle('hidden',!show);modal.classList.toggle('flex',!!show);}};
+        window.saveGoogleDriveConfig=function(){showFeedback('Google Sheets is connected through the Netlify Functions environment.',false);};
+        function showDriveModalMessage(message,isError=false){showFeedback(message,isError);}
+        function updateDriveUIStatus(){const pill=document.getElementById('driveStatusPill');if(pill)pill.textContent='Netlify + Google Sheets';const link=document.getElementById('openConnectedSheetBtn');if(link)link.href='https://docs.google.com/spreadsheets/d/1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs/edit';}
+        function loadGoogleDriveConfig(){googleScriptWebAppUrl='';googleSheetViewUrl='https://docs.google.com/spreadsheets/d/1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs/edit';updateDriveUIStatus();}
+        function sanitizeScriptUrl(){return '';}
+        window.autoSaveDriveUrlOnInput=function(){};
+        window.fetchFromGoogleSheet=async function(){return fetchAdminLeads();};
+        window.testGoogleDriveSync=async function(){if(!isAdminAuthenticated){toggleAdminLoginModal(true);return;}await fetchAdminLeads();};
+        window.toggleManualImportModal=function(show){if(show)showFeedback('Manual receipt imports are not available on the student registration form.',true);};
+        window.processManualImportText=function(){showFeedback('Manual receipt imports are not supported in this student registration portal.',true);};
 
         // ---------------------------------------------------------
         // 6. TAB NAVIGATION (LOCKED FOR NON-ADMIN)
@@ -3239,115 +2237,47 @@ function doGet(e) {
             }
         }
 
-        document.getElementById('consultancyForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const consultancyName = document.getElementById('consultancyName').value.trim();
-            const consultantName = document.getElementById('consultantName').value.trim();
-            const consultancyAddress = document.getElementById('consultancyAddress').value.trim();
-            const contactNumber = document.getElementById('contactNumber').value.trim();
-            const schoolName = document.getElementById('consultancyRequirements').value.trim();
-            const emailAddress = document.getElementById('emailAddress').value.trim();
-            const civilServiceInterest = document.getElementById('civilServiceInterest').value.trim();
-
-            document.getElementById('formFeedback').classList.add('hidden');
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-rdgold"></i> <span>Submitting... / சமர்ப்பிக்கப்படுகிறது...</span>`;
-            setLiveDriveSaveState('saving', 'Saving response to Google Sheets...');
-
-            const record = {
-                consultancyName,
-                consultantName,
-                consultancyAddress,
-                contactNumber,
-                foodOptions: schoolName,
-                consultancyRequirements: emailAddress,
-                requiredBrochure: civilServiceInterest,
-                brochureContactNumber: '',
-                personsAttended: '1',
-                attendees: [],
-                attendeeDetails: '',
-                targetAccount: 'rdccpscollege@gmail.com',
-                submittedAt: new Date().toISOString(),
-                submittedReadable: new Date().toLocaleString('en-IN')
-            };
-
-            lastSubmittedRecord = record;
-
-            const newEntry = {
-                id: (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : ('rdccps_' + Date.now()),
-                ...record
-            };
-
-            // Save to Google Sheets through a Netlify Function (no Apps Script).
-            try {
-                const sheetResponse = await fetch('/.netlify/functions/submit-lead', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newEntry)
-                });
-                const sheetResult = await sheetResponse.json().catch(() => ({}));
-                if (!sheetResponse.ok || !sheetResult.success) {
-                    const saveError = new Error(sheetResult.error || 'Could not save this registration to Google Sheets.');
-                    saveError.code = sheetResult.code;
-                    throw saveError;
-                }
-            } catch (saveError) {
-                console.error('Google Sheets save failed:', saveError);
-                setLiveDriveSaveState('error', 'Google Sheets save failed');
-                showFeedback(saveError.code === 'SHEET_ACCESS_DENIED'
-                    ? 'Registration is temporarily unavailable because Google Sheet access has not been granted. Please contact the organizer. / Google Sheet அணுகல் அனுமதி இல்லாததால் பதிவைச் சேமிக்க முடியவில்லை. நிகழ்ச்சி ஒருங்கிணைப்பாளரைத் தொடர்புகொள்ளவும்.'
-                    : 'Your submission could not be saved. Please try again or contact RDCCPS support. / உங்கள் பதிவைச் சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது RDCCPS ஆதரவைத் தொடர்புகொள்ளவும்.', true);
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit / சமர்ப்பிக்கவும்</span>`;
-                return;
+        document.getElementById('studentRegistrationForm').addEventListener('submit',async function(event){
+            event.preventDefault();
+            const ids=['studentName','schoolName','district','className','parentName','parentPhone','parentEmail','interest','message','civilServiceInterested'];
+            const record={};ids.forEach((id)=>record[id]=document.getElementById(id).value.trim());
+            if(!['Yes','No'].includes(record.civilServiceInterested)){showFeedback('Select Yes or No for Civil Service Exam Preparation / ஆம் அல்லது இல்லை என்பதைத் தேர்ந்தெடுக்கவும்.',true);return;}
+            const submitBtn=document.getElementById('submitBtn');document.getElementById('formFeedback').classList.add('hidden');
+            submitBtn.disabled=true;submitBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin text-rdgold"></i> <span>Saving... / சேமிக்கப்படுகிறது</span>';
+            setLiveDriveSaveState('saving','Saving to Google Sheets...');
+            record.targetAccount='rdccpscollege@gmail.com';record.submittedAt=new Date().toISOString();record.submittedReadable=new Date().toLocaleString('en-IN');
+            lastSubmittedRecord=record;const newEntry={id:(typeof crypto!=='undefined'&&crypto.randomUUID)?crypto.randomUUID():('rdccps_'+Date.now()),...record};
+            try{
+                const response=await fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(newEntry)});
+                const result=await response.json().catch(()=>({}));
+                if(!response.ok||!result.success){const error=new Error(result.error||'Could not save this registration to Google Sheets.');error.code=result.code;throw error;}
+            }catch(error){
+                console.error('Google Sheets save failed:',error);setLiveDriveSaveState('error','Google Sheets save failed');
+                showFeedback(error.code==='SHEET_ACCESS_DENIED'
+                    ?'Registration is temporarily unavailable because Google Sheet access has not been granted. Please contact the organizer. / Google Sheet அணுகல் அனுமதி இல்லாததால் பதிவைச் சேமிக்க முடியவில்லை. நிகழ்ச்சி ஒருங்கிணைப்பாளரைத் தொடர்புகொள்ளவும்.'
+                    :'Your submission could not be saved. Please try again or contact RDCCPS support. / உங்கள் பதிவைச் சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது RDCCPS ஆதரவைத் தொடர்புகொள்ளவும்.',true);
+                submitBtn.disabled=false;submitBtn.innerHTML='<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit / சமர்ப்பிக்கவும்</span>';return;
             }
-
             mergeSubmissionEntry(newEntry);
-
-            if (syncChannel) {
-                try { syncChannel.postMessage({ type: 'NEW_SUBMISSION', entry: newEntry }); } catch (err) {}
-            }
-
-            // 1. Save to Global Cloud Relay so Google Sites (atari-embeds) NEVER loses forms on page refresh!
+            if(syncChannel){try{syncChannel.postMessage({type:'NEW_SUBMISSION',entry:newEntry});}catch(error){}}
             await pushStateToGlobalCloudRelay();
-
-            // 2. Save to Firebase Cloud if present
-            if (typeof window.saveSubmissionToCloud === 'function') {
-                try {
-                    await window.saveSubmissionToCloud(newEntry);
-                } catch (err) {}
-            }
-
-            // Google Sheets API write completed above through the Netlify Function.
-            // No Google Apps Script is used for this submission.
-            // Clear saved form draft after successful submission
-            try { localStorage.removeItem(STORAGE_FORM_DRAFT_KEY); } catch (err) {}
-            setLiveDriveSaveState('saved', 'Saved to Google Sheets');
-
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit / சமர்ப்பிக்கவும்</span>`;
-
-            const summaryBox = document.getElementById('successSummaryBox');
-            summaryBox.innerHTML = `
-                <div><strong>Student Name / மாணவர் பெயர்:</strong> ${escapeHtml(record.consultancyName)}</div>
-                <div><strong>Parent Name / பெற்றோர் பெயர்:</strong> ${escapeHtml(record.consultantName)}</div>
-                <div><strong>District / மாவட்டம்:</strong> ${escapeHtml(record.consultancyAddress)}</div>
-                <div><strong>Parent Phone / பெற்றோர் தொலைபேசி:</strong> ${escapeHtml(record.contactNumber)}</div>
-                <div><strong>School Name / பள்ளியின் பெயர்:</strong> ${escapeHtml(record.foodOptions)}</div>
-                <div><strong>Email / மின்னஞ்சல்:</strong> ${escapeHtml(record.consultancyRequirements)}</div>
-                <div><strong>Civil Service Exam Preparation / சிவில் சர்வீஸ் தேர்வு தயாரிப்பு:</strong> ${escapeHtml(record.requiredBrochure)}</div>
-            `;
-
-            document.getElementById('successModal').classList.remove('hidden');
-            document.getElementById('successModal').classList.add('flex');
-
-            if (document.getElementById('alsoOpenEmail').checked) {
-                sendCurrentSubmissionEmail();
-            }
-
-            document.getElementById('consultancyForm').reset();
+            try{localStorage.removeItem(STORAGE_FORM_DRAFT_KEY);}catch(error){}
+            setLiveDriveSaveState('saved','Saved to Google Sheets');
+            submitBtn.disabled=false;submitBtn.innerHTML='<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit / சமர்ப்பிக்கவும்</span>';
+            document.getElementById('successSummaryBox').innerHTML=`
+                <div><strong>Student Name / மாணவர் பெயர்:</strong> ${escapeHtml(record.studentName)}</div>
+                <div><strong>School Name / பள்ளியின் பெயர்:</strong> ${escapeHtml(record.schoolName)}</div>
+                <div><strong>District / மாவட்டம்:</strong> ${escapeHtml(record.district)}</div>
+                <div><strong>Class / Grade / வகுப்பு:</strong> ${escapeHtml(record.className)}</div>
+                <div><strong>Parent / Guardian / பெற்றோர்:</strong> ${escapeHtml(record.parentName)}</div>
+                <div><strong>Phone / தொலைபேசி:</strong> ${escapeHtml(record.parentPhone)}</div>
+                <div><strong>Email / மின்னஞ்சல்:</strong> ${escapeHtml(record.parentEmail||'Not provided')}</div>
+                <div><strong>Interest / ஆர்வம்:</strong> ${escapeHtml(record.interest)}</div>
+                <div><strong>Message / செய்தி:</strong> ${escapeHtml(record.message||'None')}</div>
+                <div><strong>Civil Service Exam Preparation:</strong> ${escapeHtml(record.civilServiceInterested)}</div>`;
+            document.getElementById('successModal').classList.remove('hidden');document.getElementById('successModal').classList.add('flex');
+            if(document.getElementById('alsoOpenEmail')?.checked)sendCurrentSubmissionEmail();
+            document.getElementById('studentRegistrationForm').reset();
         });
 
         window.closeSuccessModal = function() {
@@ -3364,42 +2294,14 @@ function doGet(e) {
             }
         };
 
-        window.sendCurrentSubmissionEmail = function() {
-            if (!lastSubmittedRecord) return;
-            const r = lastSubmittedRecord;
-            const subject = encodeURIComponent(`RDCCPS "KUDIMAIPANIYATRUPADAI" - ${r.consultancyName}`);
-            const body = encodeURIComponent(
-                `RDCCPS "KUDIMAIPANIYATRUPADAI"\n` +
-                `------------------------------------------------------\n` +
-                `1. Student Name: ${r.consultancyName}\n` +
-                `2. Parent Name: ${r.consultantName}\n` +
-                `3. District: ${r.consultancyAddress}\n` +
-                `4. Parent Phone Number: ${r.contactNumber}\n` +
-                `5. School Name: ${r.foodOptions}\n` +
-                `6. Email Address: ${r.consultancyRequirements}\n` +
-                `7. Interested in Civil Service Exam Preparation: ${r.requiredBrochure}\n` +
-                `------------------------------------------------------\n` +
-                `Submitted On: ${r.submittedReadable}\n` +
-                `Support Contact: +91 9787523888`
-            );
-            window.open(`mailto:rdccpscollege@gmail.com?subject=${subject}&body=${body}`, '_blank');
+        window.sendCurrentSubmissionEmail=function(){
+            if(!lastSubmittedRecord)return;const r=lastSubmittedRecord;const subject=encodeURIComponent(`RDCCPS KUDIMAIPANIYATRUPADAI Student Registration - ${r.studentName}`);
+            const body=encodeURIComponent(`RDCCPS SCHOOL STUDENT REGISTRATION\nStudent: ${r.studentName}\nSchool: ${r.schoolName}\nDistrict: ${r.district}\nClass / Grade: ${r.className}\nParent / Guardian: ${r.parentName}\nPhone: ${r.parentPhone}\nEmail: ${r.parentEmail||'Not provided'}\nInterest: ${r.interest}\nMessage: ${r.message||'None'}\nCivil Service Exam Preparation: ${r.civilServiceInterested}\nSubmitted: ${r.submittedReadable}`);
+            window.open(`mailto:rdccpscollege@gmail.com?subject=${subject}&body=${body}`,'_blank');
         };
-
-        window.sendCurrentSubmissionWhatsApp = function() {
-            if (!lastSubmittedRecord) return;
-            const r = lastSubmittedRecord;
-            const text = encodeURIComponent(
-                `*RDCCPS "KUDIMAIPANIYATRUPADAI"*\n` +
-                `1. Student Name: ${r.consultancyName}\n` +
-                `2. Parent Name: ${r.consultantName}\n` +
-                `3. District: ${r.consultancyAddress}\n` +
-                `4. Parents Phone Number: ${r.contactNumber}\n` +
-                `5. School Name: ${r.foodOptions}\n` +
-                `6. Email Address: ${r.consultancyRequirements}\n` +
-                `7. Interested in Civil Service Exam Preparation: ${r.requiredBrochure}\n` +
-                `Submitted On: ${r.submittedReadable}`
-            );
-            window.open(`https://wa.me/919787523888?text=${text}`, '_blank');
+        window.sendCurrentSubmissionWhatsApp=function(){
+            if(!lastSubmittedRecord)return;const r=lastSubmittedRecord;const text=encodeURIComponent(`RDCCPS KUDIMAIPANIYATRUPADAI STUDENT REGISTRATION\nStudent: ${r.studentName}\nSchool: ${r.schoolName}\nDistrict: ${r.district}\nClass / Grade: ${r.className}\nParent / Guardian: ${r.parentName}\nPhone: ${r.parentPhone}\nEmail: ${r.parentEmail||'Not provided'}\nInterest: ${r.interest}\nMessage: ${r.message||'None'}\nCivil Service Exam Preparation: ${r.civilServiceInterested}\nSubmitted: ${r.submittedReadable}`);
+            window.open(`https://wa.me/919787523888?text=${text}`,'_blank');
         };
 
         // ---------------------------------------------------------
@@ -3413,99 +2315,26 @@ function doGet(e) {
                 .replace(/"/g, '&quot;');
         }
 
-        function updateAdminStatsAndBadge() {
-            const total = allSubmissions.length;
-            let vegCount = 0;
-            let nonVegCount = 0;
-            let totalPersons = 0;
-
-            allSubmissions.forEach(item => {
-                const food = String(item.foodOptions || '');
-                const parts = food.split(',').map(s => s.trim());
-                if (Array.isArray(item.attendees) && item.attendees.length) {
-                    item.attendees.forEach((attendee) => {
-                        if (attendee.food === 'Veg') vegCount++;
-                        if (attendee.food === 'Non Veg') nonVegCount++;
-                    });
-                } else {
-                    if (parts.includes('Veg')) vegCount++;
-                    if (parts.includes('Non Veg')) nonVegCount++;
-                }
-                const p = parseInt(item.personsAttended, 10);
-                if (!isNaN(p) && p > 0) totalPersons += p;
-            });
-
-            const navBadge = document.getElementById('navCountBadge');
-            if (navBadge) navBadge.textContent = total;
-            const statTotalEl = document.getElementById('statTotal');
-            if (statTotalEl) statTotalEl.textContent = total;
-            const statPersonsEl = document.getElementById('statPersons');
-            if (statPersonsEl) statPersonsEl.textContent = totalPersons;
-            const statVegEl = document.getElementById('statVeg');
-            if (statVegEl) statVegEl.textContent = vegCount;
-            const statNonVegEl = document.getElementById('statNonVeg');
-            if (statNonVegEl) statNonVegEl.textContent = nonVegCount;
-
-            renderSubmissionsTable();
+        function updateAdminStatsAndBadge(){
+            const total=allSubmissions.length,districts=new Set(allSubmissions.map(x=>String(x.district||'').trim()).filter(Boolean));
+            const yes=allSubmissions.filter(x=>x.civilServiceInterested==='Yes').length,no=allSubmissions.filter(x=>x.civilServiceInterested==='No').length;
+            const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+            put('navCountBadge',total);put('statTotal',total);put('statPersons',districts.size);put('statVeg',yes);put('statNonVeg',no);renderSubmissionsTable();
         }
-
-        window.renderSubmissionsTable = function() {
-            const tbody = document.getElementById('submissionsTableBody');
-            if (!tbody) return;
-            const queryText = (document.getElementById('adminSearchInput')?.value || '').toLowerCase().trim();
-
-            const filtered = allSubmissions.filter(item => {
-                if (!queryText) return true;
-                return (
-                    (item.consultancyName || '').toLowerCase().includes(queryText) ||
-                    (item.consultantName || '').toLowerCase().includes(queryText) ||
-                    (item.contactNumber || '').toLowerCase().includes(queryText) ||
-                    (item.foodOptions || '').toLowerCase().includes(queryText) ||
-                    (item.consultancyAddress || '').toLowerCase().includes(queryText) ||
-                    (item.brochureContactNumber || '').toLowerCase().includes(queryText) ||
-                    (item.attendeeDetails || '').toLowerCase().includes(queryText) ||
-                    String(item.personsAttended || '').toLowerCase().includes(queryText)
-                );
-            });
-
-            if (filtered.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="12" class="py-10 text-center text-rdnavy/60 font-medium">
-                            No matching consultancy registrations found.
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            tbody.innerHTML = filtered.map((item, idx) => `
-                <tr class="hover:bg-rdgold/15 transition">
-                    <td class="py-3 px-4 font-bold text-rdnavy">${idx + 1}</td>
-                    <td class="py-3 px-4 font-bold text-rdnavy">${escapeHtml(item.consultancyName)}</td>
-                    <td class="py-3 px-4">${escapeHtml(item.consultantName)}</td>
-                    <td class="py-3 px-4 max-w-xs">${escapeHtml(item.consultancyAddress)}</td>
-                    <td class="py-3 px-4 font-semibold whitespace-nowrap">
-                        <a href="tel:${escapeHtml(item.contactNumber)}" class="text-rdnavy hover:underline">${escapeHtml(item.contactNumber)}</a>
-                    </td>
-                    <td class="py-3 px-4">
-                        <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-rdmaroon text-rdgold">
-                            ${escapeHtml(item.foodOptions)}
-                        </span>
-                    </td>
-                    <td class="py-3 px-4 max-w-xs">${escapeHtml(item.consultancyRequirements)}</td>
-                    <td class="py-3 px-4 font-medium">${escapeHtml(item.requiredBrochure)}</td>
-                    <td class="py-3 px-4 font-semibold whitespace-nowrap">${escapeHtml(item.brochureContactNumber || '')}</td>
-                    <td class="py-3 px-4 font-bold text-center text-rdmaroon">${escapeHtml(item.personsAttended || '1')}</td>
-                    <td class="py-3 px-4 whitespace-pre-line">${escapeHtml(item.attendeeDetails || '')}</td>
-                    <td class="py-3 px-4 text-center whitespace-nowrap">
-                        <button type="button" onclick="deleteSubmission('${escapeHtml(item.id)}')" title="Delete This Received Form" class="px-3 py-1.5 rounded-lg bg-rdmaroon text-rdgold border border-rdgold hover:opacity-90 text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
-                            <i class="fa-solid fa-trash-can"></i>
-                            <span>Delete</span>
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
+        window.renderSubmissionsTable=function(){
+            const tbody=document.getElementById('submissionsTableBody');if(!tbody)return;
+            const query=(document.getElementById('adminSearchInput')?.value||'').toLowerCase().trim();
+            const keys=['studentName','schoolName','district','className','parentName','parentPhone','parentEmail','interest','message','civilServiceInterested'];
+            const rows=allSubmissions.filter(x=>!query||keys.some(k=>String(x[k]||'').toLowerCase().includes(query)));
+            if(!rows.length){tbody.innerHTML='<tr><td colspan="12" class="py-10 text-center text-rdnavy/60 font-medium">No matching student registrations found.</td></tr>';return;}
+            tbody.innerHTML=rows.map((x,i)=>`<tr class="hover:bg-rdgold/15 transition">
+                <td class="py-3 px-4 font-bold text-rdnavy">${i+1}</td><td class="py-3 px-4 font-bold text-rdnavy">${escapeHtml(x.studentName)}</td>
+                <td class="py-3 px-4">${escapeHtml(x.schoolName)}</td><td class="py-3 px-4">${escapeHtml(x.district)}</td><td class="py-3 px-4">${escapeHtml(x.className)}</td>
+                <td class="py-3 px-4">${escapeHtml(x.parentName)}</td><td class="py-3 px-4 whitespace-nowrap"><a href="tel:${escapeHtml(x.parentPhone)}">${escapeHtml(x.parentPhone)}</a></td>
+                <td class="py-3 px-4">${escapeHtml(x.parentEmail||'')}</td><td class="py-3 px-4">${escapeHtml(x.interest)}</td><td class="py-3 px-4">${escapeHtml(x.message||'')}</td>
+                <td class="py-3 px-4 text-center">${escapeHtml(x.civilServiceInterested)}</td>
+                <td class="py-3 px-4 text-center whitespace-nowrap"><button type="button" onclick="deleteSubmission('${escapeHtml(x.id)}')" title="Delete student registration" class="px-3 py-1.5 rounded-lg bg-rdmaroon text-rdgold border border-rdgold text-xs font-bold"><i class="fa-solid fa-trash-can"></i> Delete</button></td>
+            </tr>`).join('');
         };
 
         window.deleteSubmission = function(id) {
@@ -3520,16 +2349,16 @@ function doGet(e) {
             const msgEl = document.getElementById('deleteModalMessage');
             const detailsEl = document.getElementById('deleteModalDetails');
 
-            if (titleEl) titleEl.textContent = 'Delete Received Consultancy Form';
-            if (msgEl) msgEl.textContent = 'Are you sure you want to permanently delete this received form from the Admin Portal?';
+            if (titleEl) titleEl.textContent = 'Delete Student Registration';
+            if (msgEl) msgEl.textContent = 'Are you sure you want to permanently delete this student registration?';
             if (detailsEl) {
                 if (target) {
                     detailsEl.classList.remove('hidden');
                     detailsEl.innerHTML = `
-                        <div><strong>Consultancy Name:</strong> ${escapeHtml(target.consultancyName)}</div>
-                        <div><strong>Consultant Name:</strong> ${escapeHtml(target.consultantName)}</div>
-                        <div><strong>Contact Number:</strong> ${escapeHtml(target.contactNumber)}</div>
-                        <div><strong>Persons Attended:</strong> ${escapeHtml(target.personsAttended || '1')}</div>
+                        <div><strong>Student:</strong> ${escapeHtml(target.studentName)}</div>
+                        <div><strong>School:</strong> ${escapeHtml(target.schoolName)}</div>
+                        <div><strong>District:</strong> ${escapeHtml(target.district)}</div>
+                        <div><strong>Parent phone:</strong> ${escapeHtml(target.parentPhone)}</div>
                     `;
                 } else {
                     detailsEl.classList.add('hidden');
@@ -3555,7 +2384,7 @@ function doGet(e) {
             const msgEl = document.getElementById('deleteModalMessage');
             const detailsEl = document.getElementById('deleteModalDetails');
 
-            if (titleEl) titleEl.textContent = 'Delete All Received Forms';
+            if (titleEl) titleEl.textContent = 'Delete All Student Registrations';
             if (msgEl) msgEl.textContent = `Are you sure you want to delete all ${allSubmissions.length} received form(s) from the Admin Portal?`;
             if (detailsEl) {
                 detailsEl.classList.remove('hidden');
@@ -3628,71 +2457,21 @@ function doGet(e) {
             updateAdminStatsAndBadge();
         };
 
-        window.exportResponsesToCSV = function() {
-            if (!isAdminAuthenticated) return;
-            if (allSubmissions.length === 0) {
-                showFeedback('No submissions available to export yet.', true);
-                switchTab('form');
-                return;
-            }
-
-            const headers = [
-                'S.No',
-                '1. Consultancy Name',
-                '2. Consultant Name',
-                '3. Consultancy Address',
-                '4. Contact Number',
-                '5. Food Options',
-                '6. Consultancy Requirements',
-                '7. Required Brochure',
-                '8. Contact Number for Brochure Printing',
-                '9. Number Of Persons Attended',
-                'Attendee Names & Food Options',
-                'Submitted Timestamp',
-                'Official Account'
-            ];
-
-            const rows = allSubmissions.map((item, i) => [
-                i + 1,
-                `"${String(item.consultancyName || '').replace(/"/g, '""')}"`,
-                `"${String(item.consultantName || '').replace(/"/g, '""')}"`,
-                `"${String(item.consultancyAddress || '').replace(/"/g, '""')}"`,
-                `"${String(item.contactNumber || '').replace(/"/g, '""')}"`,
-                `"${String(item.foodOptions || '').replace(/"/g, '""')}"`,
-                `"${String(item.consultancyRequirements || '').replace(/"/g, '""')}"`,
-                `"${String(item.requiredBrochure || '').replace(/"/g, '""')}"`,
-                `"${String(item.brochureContactNumber || '').replace(/"/g, '""')}"`,
-                `"${String(item.personsAttended || '').replace(/"/g, '""')}"`,
-                `"${String(item.attendeeDetails || '').replace(/"/g, '""')}"`,
-                `"${String(item.submittedReadable || '')}"`,
-                `"rdccpscollege@gmail.com"`
-            ]);
-
-            const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'RDCCPS_Consultancy_Meet_Admission_2027_2028_Responses.csv';
-            a.click();
-            URL.revokeObjectURL(url);
+        window.exportResponsesToCSV=function(){
+            if(!isAdminAuthenticated)return;
+            if(!allSubmissions.length){showFeedback('No student registrations available to export yet.',true);switchTab('form');return;}
+            const headers=['S.No','Student Name','School Name','District','Class / Grade','Parent / Guardian Name','Parent / Guardian Phone','Parent / Guardian Email','Course / Area of Interest','Message','Civil Service Exam Preparation','Submitted Timestamp'];
+            const quote=value=>`"${String(value??'').replace(/"/g,'""')}"`;
+            const rows=allSubmissions.map((x,i)=>[i+1,x.studentName,x.schoolName,x.district,x.className,x.parentName,x.parentPhone,x.parentEmail,x.interest,x.message,x.civilServiceInterested,x.submittedReadable].map(quote));
+            const url=URL.createObjectURL(new Blob([[headers.map(quote).join(','),...rows.map(r=>r.join(','))].join('\n')],{type:'text/csv;charset=utf-8;'}));
+            const a=document.createElement('a');a.href=url;a.download='RDCCPS_School_Student_Registrations.csv';a.click();URL.revokeObjectURL(url);
         };
-
-        window.emailAllSummaryToCollege = function() {
-            if (!isAdminAuthenticated) return;
-            const subject = encodeURIComponent(`RDCCPS "KUDIMAIPANIYATRUPADAI" (${allSubmissions.length} Registrations)`);
-            const lines = allSubmissions.map((r, i) =>
-                `${i + 1}. ${r.consultancyName} | Consultant: ${r.consultantName} | Ph: ${r.contactNumber} | Food: ${r.foodOptions} | Attendees: ${r.attendeeDetails || 'Not recorded'} | Brochure: ${r.requiredBrochure} | Brochure Printing Contact: ${r.brochureContactNumber || ''} | Persons Attended: ${r.personsAttended || '1'} | Req: ${r.consultancyRequirements}`
-            ).join('\n');
-
-            const body = encodeURIComponent(
-                `RDCCPS "KUDIMAIPANIYATRUPADAI"\n` +
-                `Target Account: rdccpscollege@gmail.com\n` +
-                `Total Submissions: ${allSubmissions.length}\n\n` +
-                (lines || 'No registrations yet.')
-            );
-            window.open(`mailto:rdccpscollege@gmail.com?subject=${subject}&body=${body}`, '_blank');
+        window.emailAllSummaryToCollege=function(){
+            if(!isAdminAuthenticated)return;
+            const subject=encodeURIComponent(`RDCCPS Student Registrations Summary (${allSubmissions.length})`);
+            const lines=allSubmissions.map((x,i)=>`${i+1}. ${x.studentName} | School: ${x.schoolName} | District: ${x.district} | Class: ${x.className} | Parent: ${x.parentName} | Phone: ${x.parentPhone} | Email: ${x.parentEmail||'Not provided'} | Interest: ${x.interest} | Civil Service Preparation: ${x.civilServiceInterested} | Message: ${x.message||'None'}`).join('\n');
+            const body=encodeURIComponent(`RDCCPS SCHOOL STUDENT REGISTRATIONS\nTarget account: rdccpscollege@gmail.com\nTotal submissions: ${allSubmissions.length}\n\n${lines||'No student registrations yet.'}`);
+            window.open(`mailto:rdccpscollege@gmail.com?subject=${subject}&body=${body}`,'_blank');
         };
 
         // ---------------------------------------------------------
@@ -3753,7 +2532,7 @@ function doGet(e) {
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rdccps-consultancy-meet-2027-2028';
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rdccps-school-student-registration-2027-2028';
         let db = null;
         let auth = null;
         let currentUser = null;
@@ -3777,7 +2556,7 @@ function doGet(e) {
                     currentUser = user;
                     if (!user) return;
 
-                    // Also sync the admin's Google Drive Excel Web App URL across all devices automatically
+                    // Also sync the admin's Google Sheets Web App URL across all devices automatically
                     const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portal_settings', 'drive_config');
                     onSnapshot(
                         configDocRef,
@@ -3815,7 +2594,7 @@ function doGet(e) {
                                 }
                                 if (typeof updateDriveUIStatus === 'function') updateDriveUIStatus();
                                 if (typeof window.renderCustomQRCode === 'function') window.renderCustomQRCode();
-                                if (typeof setLiveDriveSaveState === 'function') setLiveDriveSaveState('saved', 'Changes saved in Drive');
+                                if (typeof setLiveDriveSaveState === 'function') setLiveDriveSaveState('saved', 'Ready for registration');
                                 if (googleScriptWebAppUrl && !hadUrlBefore && typeof window.fetchFromGoogleSheet === 'function') {
                                     window.fetchFromGoogleSheet(true);
                                 }

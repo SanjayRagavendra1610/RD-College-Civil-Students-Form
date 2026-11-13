@@ -1,15 +1,27 @@
 import { google } from "googleapis";
-import { ensureLeadSheetSchema, SPREADSHEET_ID, LEAD_SHEET_HEADERS } from "./_shared/lead-sheet-schema.mjs";
+import { ensureStudentSheet, SPREADSHEET_ID, STUDENT_SHEET_HEADERS } from "./_shared/lead-sheet-schema.mjs";
 import { allowedOrigins } from "./_shared/admin-auth.mjs";
 
 const REQUIRED_FIELDS = [
-  "consultancyName",
-  "consultantName",
-  "consultancyAddress",
-  "contactNumber",
-  "consultancyRequirements",
-  "requiredBrochure",
+  "studentName",
+  "schoolName",
+  "district",
+  "className",
+  "parentName",
+  "parentPhone",
+  "interest",
+  "civilServiceInterested",
 ];
+
+const TAMIL_NADU_DISTRICTS = new Set([
+  "Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore", "Dharmapuri",
+  "Dindigul", "Erode", "Kallakurichi", "Kancheepuram", "Kanniyakumari", "Karur",
+  "Krishnagiri", "Madurai", "Mayiladuthurai", "Nagapattinam", "Namakkal", "Perambalur",
+  "Pudukkottai", "Ramanathapuram", "Ranipet", "Salem", "Sivaganga", "Tenkasi",
+  "Thanjavur", "Theni", "The Nilgiris", "Thoothukudi", "Tiruchirappalli", "Tirunelveli",
+  "Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur", "Vellore",
+  "Viluppuram", "Virudhunagar",
+]);
 
 function json(statusCode, body, origin = "") {
   return {
@@ -29,7 +41,7 @@ export async function handler(event) {
   const allowedOrigin = origin && origins.has(origin) ? origin : [...origins][0];
 
   if (event.httpMethod === "OPTIONS") {
-    if (origin && origin !== allowedOrigin) return json(403, { success: false, error: "Origin not allowed." });
+    if (origin && !origins.has(origin)) return json(403, { success: false, error: "Origin not allowed." });
     return {
       statusCode: 204,
       headers: {
@@ -42,17 +54,14 @@ export async function handler(event) {
       body: "",
     };
   }
-
   if (event.httpMethod !== "POST") {
-    return json(405, { success: false, error: "Method not allowed." }, origin === allowedOrigin ? origin : "");
+    return json(405, { success: false, error: "Method not allowed." }, origin && origins.has(origin) ? origin : "");
   }
-  if (origin && origin !== allowedOrigin) {
-    return json(403, { success: false, error: "Origin not allowed." });
-  }
+  if (origin && !origins.has(origin)) return json(403, { success: false, error: "Origin not allowed." });
 
   try {
     if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-      console.error("Missing Google Sheets environment variables.");
+      console.error("Missing Google Sheets service account credentials.");
       return json(500, { success: false, error: "Server is not configured for Google Sheets." }, origin);
     }
 
@@ -65,27 +74,32 @@ export async function handler(event) {
         return json(400, { success: false, error: `Field is too long: ${field}` }, origin);
       }
     }
+    if (!TAMIL_NADU_DISTRICTS.has(payload.district.trim())) {
+      return json(400, { success: false, error: "Select a valid Tamil Nadu district." }, origin);
+    }
+    if (!["Yes", "No"].includes(payload.civilServiceInterested)) {
+      return json(400, { success: false, error: "Choose Yes or No for Civil Service Exam Preparation." }, origin);
+    }
 
-    const persons = Number(payload.personsAttended || 1);
-    if (!Number.isInteger(persons) || persons < 1 || persons > 10000) {
-      return json(400, { success: false, error: "Invalid number of persons." }, origin);
+    const parentEmail = String(payload.parentEmail || "").trim();
+    if (parentEmail.length > 320 || (parentEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parentEmail))) {
+      return json(400, { success: false, error: "Enter a valid parent email address." }, origin);
     }
-    const attendees = Array.isArray(payload.attendees) ? payload.attendees : [];
-    if (attendees.length && attendees.length !== persons) {
-      return json(400, { success: false, error: "Attendee count does not match the number of persons." }, origin);
+    if (typeof payload.parentEmail !== "undefined" && typeof payload.parentEmail !== "string") {
+      return json(400, { success: false, error: "Invalid parent email." }, origin);
     }
-    for (const attendee of attendees) {
-      if (!attendee || typeof attendee.name !== "string" || !attendee.name.trim() || attendee.name.length > 500) {
-        return json(400, { success: false, error: "Each attendee must have a valid name." }, origin);
+    for (const field of ["message"]) {
+      if (typeof payload[field] !== "undefined" && typeof payload[field] !== "string") {
+        return json(400, { success: false, error: `Invalid field: ${field}` }, origin);
       }
-      if (!["Veg", "Non Veg"].includes(attendee.food)) {
-        return json(400, { success: false, error: "Each attendee must have a valid food option." }, origin);
+      if (String(payload[field] || "").length > 5000) {
+        return json(400, { success: false, error: "Message is too long." }, origin);
       }
     }
-    const attendeeNames = attendees.map((attendee) => attendee.name.trim()).join("\n");
-    const attendeeFoods = attendees.map((attendee) => attendee.food).join("\n");
-    if (attendeeNames.length > 45000 || attendeeFoods.length > 45000) {
-      return json(400, { success: false, error: "Attendee details are too long to save. Reduce the number or length of names." }, origin);
+
+    const recordId = String(payload.id || "");
+    if (!recordId || recordId.length > 150) {
+      return json(400, { success: false, error: "Missing or invalid submission ID." }, origin);
     }
 
     const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
@@ -95,60 +109,48 @@ export async function handler(event) {
     });
     const sheets = google.sheets({ version: "v4", auth });
     const spreadsheetId = SPREADSHEET_ID;
-
     const spreadsheet = await sheets.spreadsheets.get({
       spreadsheetId,
       fields: "sheets.properties(sheetId,title,gridProperties)",
     });
-    const firstSheet = spreadsheet.data.sheets?.[0]?.properties;
-    if (!firstSheet?.title) throw new Error("Spreadsheet does not contain a worksheet.");
+    const worksheetProperties = (spreadsheet.data.sheets || []).map((sheet) => sheet.properties).filter(Boolean);
+    const studentSheet = await ensureStudentSheet(sheets, spreadsheetId, worksheetProperties);
+    const sheetTitle = studentSheet.title.replace(/'/g, "''");
 
-    const sheetTitle = await ensureLeadSheetSchema(sheets, spreadsheetId, firstSheet);
-    const range = `'${sheetTitle}'!A:M`;
-
-    // Avoid appending the same submission ID twice if a client retries.
-    const recordId = String(payload.id || "");
-    if (!recordId || recordId.length > 150) {
-      return json(400, { success: false, error: "Missing or invalid submission ID." }, origin);
-    }
-    const lastRows = await sheets.spreadsheets.values.get({
+    const existingIds = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: `'${sheetTitle}'!K2:K`,
+      range: `'${sheetTitle}'!L2:L`,
     });
-    const alreadyExists = (lastRows.data.values || []).some((row) => String(row[0] || "") === recordId);
-    if (alreadyExists) {
+    if ((existingIds.data.values || []).some((row) => String(row[0] || "") === recordId)) {
       return json(200, { success: true, duplicate: true }, origin);
     }
 
-    const timestamp = payload.submittedAt || new Date().toISOString();
-    const foodOptions = payload.foodOptions || [...new Set(attendees.map((attendee) => attendee.food))].join(", ");
+    const values = [
+      payload.submittedAt || new Date().toISOString(),
+      payload.studentName.trim(),
+      payload.schoolName.trim(),
+      payload.district.trim(),
+      payload.className.trim(),
+      payload.parentName.trim(),
+      payload.parentPhone.trim(),
+      parentEmail,
+      payload.interest.trim(),
+      String(payload.message || "").trim(),
+      payload.civilServiceInterested,
+      recordId,
+    ];
+    if (values.length !== STUDENT_SHEET_HEADERS.length) throw new Error("Student row does not match sheet schema.");
+
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range,
+      range: `'${sheetTitle}'!A:L`,
       valueInputOption: "RAW",
       insertDataOption: "INSERT_ROWS",
-      requestBody: {
-        values: [[
-          timestamp,
-          payload.consultancyName.trim(),
-          payload.consultantName.trim(),
-          payload.consultancyAddress.trim(),
-          payload.contactNumber.trim(),
-          foodOptions,
-          payload.consultancyRequirements.trim(),
-          payload.requiredBrochure.trim(),
-          String(payload.brochureContactNumber || "").trim(),
-          String(persons),
-          recordId,
-          attendeeNames,
-          attendeeFoods,
-        ]],
-      },
+      requestBody: { values: [values] },
     });
-
     return json(200, { success: true }, origin);
   } catch (error) {
-    // Do not log Google error objects: they can include authorization headers.
+    // Keep permission details out of logs and return an actionable public message.
     console.error("submit-lead failed", { status: error?.response?.status || 500 });
     const googleError = error?.response?.data?.error;
     if (error?.response?.status === 403 && googleError?.message === "The caller does not have permission") {

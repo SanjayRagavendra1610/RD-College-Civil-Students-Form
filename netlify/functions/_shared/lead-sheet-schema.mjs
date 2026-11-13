@@ -1,93 +1,145 @@
-export const LEAD_SHEET_HEADERS = [
+export const STUDENT_SHEET_TITLE = "School Students";
+
+export const STUDENT_SHEET_HEADERS = [
   "Timestamp",
-  "1. Consultancy Name",
-  "2. Consultant Name",
-  "3. Consultancy Address",
-  "4. Contact Number",
-  "5. Food Options",
-  "6. Requirements",
-  "7. Required Brochure",
-  "8. Contact Number for Brochure Printing",
-  "9. Persons Attended",
+  "Student Name",
+  "School Name",
+  "District",
+  "Class / Grade",
+  "Parent / Guardian Name",
+  "Parent / Guardian Phone",
+  "Parent / Guardian Email",
+  "Course / Area of Interest",
+  "Message",
+  "Civil Service Exam Preparation",
   "Record ID",
-  "10. Attendee Names (one per line)",
-  "11. Attendee Food Options (same order)",
 ];
 
-export async function ensureLeadSheetSchema(sheets, spreadsheetId, firstSheet) {
-  const sheetTitle = firstSheet.title.replace(/'/g, "''");
+const REMOVED_LEGACY_HEADERS = new Set([
+  "8. Contact Number for Brochure Printing",
+  "10. Attendee Names (one per line)",
+  "11. Attendee Food Options (same order)",
+]);
+
+export const SPREADSHEET_ID =
+  process.env.GOOGLE_SHEET_ID || "1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs";
+
+function quoteSheetTitle(title) {
+  return `'${String(title).replace(/'/g, "''")}'`;
+}
+
+async function removeRequestedLegacyColumns(sheets, spreadsheetId, legacySheet) {
+  if (!legacySheet?.title || legacySheet.title === STUDENT_SHEET_TITLE) return;
+  const result = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `${quoteSheetTitle(legacySheet.title)}!A1:AZ1`,
+  });
+  const headers = result.data.values?.[0] || [];
+  const columns = headers
+    .map((header, index) => REMOVED_LEGACY_HEADERS.has(String(header || "").trim()) ? index : -1)
+    .filter((index) => index >= 0)
+    .sort((a, b) => b - a);
+
+  if (!columns.length) return;
+  await sheets.spreadsheets.batchUpdate({
+    spreadsheetId,
+    requestBody: {
+      requests: columns.map((columnIndex) => ({
+        deleteDimension: {
+          range: {
+            sheetId: legacySheet.sheetId,
+            dimension: "COLUMNS",
+            startIndex: columnIndex,
+            endIndex: columnIndex + 1,
+          },
+        },
+      })),
+    },
+  });
+}
+
+async function getWorksheetProperties(sheets, spreadsheetId) {
+  const result = await sheets.spreadsheets.get({
+    spreadsheetId,
+    fields: "sheets.properties(sheetId,title,gridProperties)",
+  });
+  return (result.data.sheets || []).map((sheet) => sheet.properties).filter(Boolean);
+}
+
+export async function ensureStudentSheet(sheets, spreadsheetId, worksheetProperties = []) {
+  const worksheets = Array.isArray(worksheetProperties)
+    ? worksheetProperties
+    : worksheetProperties?.title
+      ? [worksheetProperties]
+      : await getWorksheetProperties(sheets, spreadsheetId);
+
+  const legacySheet = worksheets.find((sheet) => sheet.title !== STUDENT_SHEET_TITLE);
+  await removeRequestedLegacyColumns(sheets, spreadsheetId, legacySheet);
+
+  let studentSheet = worksheets.find((sheet) => sheet.title === STUDENT_SHEET_TITLE);
+  if (!studentSheet) {
+    const created = await sheets.spreadsheets.batchUpdate({
+      spreadsheetId,
+      requestBody: {
+        requests: [{
+          addSheet: {
+            properties: {
+              title: STUDENT_SHEET_TITLE,
+              gridProperties: { rowCount: 1000, columnCount: STUDENT_SHEET_HEADERS.length, frozenRowCount: 1 },
+            },
+          },
+        }],
+      },
+    });
+    studentSheet = created.data.replies?.[0]?.addSheet?.properties;
+    if (!studentSheet?.sheetId) {
+      const refreshed = await getWorksheetProperties(sheets, spreadsheetId);
+      studentSheet = refreshed.find((sheet) => sheet.title === STUDENT_SHEET_TITLE);
+    }
+  }
+  if (!studentSheet?.sheetId) throw new Error(`Could not create the "${STUDENT_SHEET_TITLE}" worksheet.`);
+
+  const title = quoteSheetTitle(STUDENT_SHEET_TITLE);
   const headerResult = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: `'${sheetTitle}'!A1:M1`,
+    range: `${title}!A1:L1`,
   });
   const currentHeaders = headerResult.data.values?.[0] || [];
 
   if (!currentHeaders.length) {
     await sheets.spreadsheets.values.update({
       spreadsheetId,
-      range: `'${sheetTitle}'!A1:M1`,
+      range: `${title}!A1:L1`,
       valueInputOption: "RAW",
-      requestBody: { values: [LEAD_SHEET_HEADERS] },
+      requestBody: { values: [STUDENT_SHEET_HEADERS] },
     });
-    await sheets.spreadsheets.batchUpdate({
-      spreadsheetId,
-      requestBody: {
-        requests: [{
-          repeatCell: {
-            range: { sheetId: firstSheet.sheetId, startRowIndex: 0, endRowIndex: 1 },
-            cell: {
-              userEnteredFormat: {
-                backgroundColor: { red: 0.05, green: 0.16, blue: 0.30 },
-                textFormat: { foregroundColor: { red: 0.91, green: 0.84, blue: 0.53 }, bold: true },
-              },
-            },
-            fields: "userEnteredFormat(backgroundColor,textFormat)",
-          },
-        }],
-      },
-    });
-    return sheetTitle;
-  }
-
-  if (currentHeaders[7] === LEAD_SHEET_HEADERS[7] && currentHeaders[8] !== LEAD_SHEET_HEADERS[8]) {
     await sheets.spreadsheets.batchUpdate({
       spreadsheetId,
       requestBody: {
         requests: [
           {
-            insertDimension: {
-              range: { sheetId: firstSheet.sheetId, dimension: "COLUMNS", startIndex: 8, endIndex: 9 },
-              inheritFromBefore: true,
+            repeatCell: {
+              range: { sheetId: studentSheet.sheetId, startRowIndex: 0, endRowIndex: 1 },
+              cell: {
+                userEnteredFormat: {
+                  backgroundColor: { red: 0.05, green: 0.16, blue: 0.30 },
+                  textFormat: { foregroundColor: { red: 0.91, green: 0.84, blue: 0.53 }, bold: true },
+                },
+              },
+              fields: "userEnteredFormat(backgroundColor,textFormat)",
             },
           },
           {
-            updateCells: {
-              range: { sheetId: firstSheet.sheetId, startRowIndex: 0, endRowIndex: 1, startColumnIndex: 8, endColumnIndex: 13 },
-              rows: [{
-                values: LEAD_SHEET_HEADERS.slice(8).map((header) => ({ userEnteredValue: { stringValue: header } })),
-              }],
-              fields: "userEnteredValue",
+            updateSheetProperties: {
+              properties: { sheetId: studentSheet.sheetId, gridProperties: { frozenRowCount: 1 } },
+              fields: "gridProperties.frozenRowCount",
             },
           },
         ],
       },
     });
-    return sheetTitle;
+  } else if (STUDENT_SHEET_HEADERS.some((header, index) => currentHeaders[index] !== header)) {
+    throw new Error(`The "${STUDENT_SHEET_TITLE}" worksheet has unexpected headers. Correct its first row before accepting submissions.`);
   }
-
-  for (let columnIndex = 0; columnIndex < LEAD_SHEET_HEADERS.length; columnIndex += 1) {
-    if (!currentHeaders[columnIndex]) {
-      const column = String.fromCharCode(65 + columnIndex);
-      await sheets.spreadsheets.values.update({
-        spreadsheetId,
-        range: `'${sheetTitle}'!${column}1`,
-        valueInputOption: "RAW",
-        requestBody: { values: [[LEAD_SHEET_HEADERS[columnIndex]]] },
-      });
-    }
-  }
-  return sheetTitle;
+  return studentSheet;
 }
-
-// Target spreadsheet for all registrations (not a secret; env var overrides it).
-export const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID || "1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs";
