@@ -1,5 +1,6 @@
 import { google } from "googleapis";
-import { ensureLeadSheetSchema, LEAD_SHEET_HEADERS } from "./_shared/lead-sheet-schema.mjs";
+import { ensureLeadSheetSchema, SPREADSHEET_ID, LEAD_SHEET_HEADERS } from "./_shared/lead-sheet-schema.mjs";
+import { allowedOrigins } from "./_shared/admin-auth.mjs";
 
 const REQUIRED_FIELDS = [
   "consultancyName",
@@ -24,7 +25,8 @@ function json(statusCode, body, origin = "") {
 
 export async function handler(event) {
   const origin = event.headers?.origin || event.headers?.Origin || "";
-  const allowedOrigin = process.env.ALLOWED_ORIGIN || new URL(process.env.URL || "http://localhost:8888").origin;
+  const origins = allowedOrigins();
+  const allowedOrigin = origin && origins.has(origin) ? origin : [...origins][0];
 
   if (event.httpMethod === "OPTIONS") {
     if (origin && origin !== allowedOrigin) return json(403, { success: false, error: "Origin not allowed." });
@@ -49,7 +51,7 @@ export async function handler(event) {
   }
 
   try {
-    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.GOOGLE_SHEET_ID) {
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
       console.error("Missing Google Sheets environment variables.");
       return json(500, { success: false, error: "Server is not configured for Google Sheets." }, origin);
     }
@@ -92,7 +94,7 @@ export async function handler(event) {
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
     const sheets = google.sheets({ version: "v4", auth });
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const spreadsheetId = SPREADSHEET_ID;
 
     const spreadsheet = await sheets.spreadsheets.get({
       spreadsheetId,
@@ -146,7 +148,16 @@ export async function handler(event) {
 
     return json(200, { success: true }, origin);
   } catch (error) {
-    console.error("submit-lead failed:", error?.message || error);
+    // Do not log Google error objects: they can include authorization headers.
+    console.error("submit-lead failed", { status: error?.response?.status || 500 });
+    const googleError = error?.response?.data?.error;
+    if (error?.response?.status === 403 && googleError?.message === "The caller does not have permission") {
+      return json(503, {
+        success: false,
+        code: "SHEET_ACCESS_DENIED",
+        error: "Registration is temporarily unavailable because Google Sheet access has not been granted. Please contact the organizer.",
+      }, origin);
+    }
     return json(500, { success: false, error: "Could not save to Google Sheets. Please try again." }, origin);
   }
 }
