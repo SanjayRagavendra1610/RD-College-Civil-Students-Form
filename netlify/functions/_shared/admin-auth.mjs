@@ -20,7 +20,11 @@ export function response(statusCode, body, origin = "") {
 }
 
 export function allowedOrigins() {
-  const origins = new Set([allowedOrigin()]);
+  const origins = new Set([
+    allowedOrigin(),
+    "https://rdcollege-civil.netlify.app",
+    "https://main--rdcollege-civil.netlify.app",
+  ]);
   for (const value of [process.env.URL, process.env.DEPLOY_PRIME_URL, process.env.DEPLOY_URL]) {
     try {
       if (value) origins.add(new URL(value).origin);

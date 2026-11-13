@@ -62,7 +62,11 @@ export async function handler(event) {
   try {
     if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
       console.error("Missing Google Sheets service account credentials.");
-      return json(500, { success: false, error: "Server is not configured for Google Sheets." }, origin);
+      return json(503, {
+        success: false,
+        code: "SHEETS_NOT_CONFIGURED",
+        error: "Registration is temporarily unavailable. Please contact the organizer to configure Google Sheets access.",
+      }, origin);
     }
 
     const payload = JSON.parse(event.body || "{}");
