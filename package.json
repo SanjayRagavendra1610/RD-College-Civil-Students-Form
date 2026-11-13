@@ -1,0 +1,18 @@
+{
+  "name": "rdccps-consultancy-netlify-sheets",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev",
+    "deploy:build": "netlify build"
+  },
+  "dependencies": {
+    "@netlify/database": "^2.0.3",
+    "drizzle-orm": "^1.0.0-beta.22",
+    "googleapis": "^144.0.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^1.0.0-beta.22",
+    "netlify-cli": "^23.0.0"
+  }
+}
