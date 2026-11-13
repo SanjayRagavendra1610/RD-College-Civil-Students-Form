@@ -283,22 +283,22 @@ y<!DOCTYPE html>
 
                     <!-- Question 6: Email Address? -->
                     <div class="bg-white p-5 rounded-xl border-l-8 border-rdnavy shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="requiredBrochure" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
+                        <label for="emailAddress" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
                             <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdnavy text-rdgold text-xs font-extrabold mr-2">6</span>
                             Email Address? / மின்னஞ்சல் முகவரி? <span class="text-rdmaroon font-extrabold">*</span>
                         </label>
-                        <input type="text" id="EmailAddress" name="Emailaddress" required
+                        <input type="email" id="emailAddress" name="emailAddress" required
                             placeholder="example@gmail.com / உதாரணம்@gmail.com"
                             class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
                     </div>
 
                     <!-- Question 7: Intrested in Civil Service Exam Preparation -->
                     <div class="bg-white p-5 rounded-xl border-l-8 border-rdmaroon shadow-sm ring-1 ring-rdnavy/10">
-                        <label for="brochureContactNumber" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
+                        <label for="civilServiceInterest" class="block text-sm sm:text-base font-bold text-rdnavy mb-2">
                             <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rdmaroon text-rdgold text-xs font-extrabold mr-2">7</span>
                             Interested in Civil Service Exam Preparation? / சிவில் சர்வீஸ் தேர்வு தயாரிப்பில் ஆர்வமா? <span class="text-rdmaroon font-extrabold">*</span>
                         </label>
-                        <input type="tel" id="brochureContactNumber" name="brochureContactNumber" required
+                        <input type="text" id="civilServiceInterest" name="civilServiceInterest" required
                             placeholder="Yes or No / ஆம் அல்லது இல்லை"
                             class="rd-input w-full rounded-lg px-4 py-3 text-sm sm:text-base font-medium">
                     </div>
@@ -687,9 +687,9 @@ y<!DOCTYPE html>
                 <div class="w-16 h-16 rounded-full bg-rdnavy text-rdgold border-2 border-rdgold mx-auto flex items-center justify-center text-3xl shadow-lg">
                     <i class="fa-solid fa-check"></i>
                 </div>
-                <h3 class="font-serif font-extrabold text-xl text-rdnavy">Registration Submitted!</h3>
+                <h3 class="font-serif font-extrabold text-xl text-rdnavy">Thank You! Your Submission Was Successful / நன்றி! உங்கள் பதிவு வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது</h3>
                 <p class="text-xs sm:text-sm text-rdnavy/80">
-                    Your registration has been saved to Google Sheets. The organizers can view it in the Admin Responses page.
+                    Your registration has been successfully received and saved. The organizers can view it in the Admin Responses page. / உங்கள் பதிவு வெற்றிகரமாக பெறப்பட்டு சேமிக்கப்பட்டுள்ளது. அமைப்பாளர்கள் Admin Responses பக்கத்தில் அதைப் பார்க்கலாம்.
                 </p>
 
                 <div id="successSummaryBox" class="bg-white p-4 rounded-xl border border-rdnavy/20 text-left text-xs space-y-1 text-rdnavy"></div>
@@ -1077,8 +1077,10 @@ function doGet(e) {
         }
 
         function renderAttendeeFields(attendees = getAttendeeEntries()) {
-            const count = Number(document.getElementById('personsAttended').value);
+            const countInput = document.getElementById('personsAttended');
             const container = document.getElementById('attendeeFields');
+            if (!countInput || !container) return;
+            const count = Number(countInput.value);
             if (!Number.isInteger(count) || count < 1 || count > 10000) {
                 container.innerHTML = '<p class="text-sm text-rdnavy/60">Enter the number of persons above to add attendee fields.</p>';
                 return;
@@ -1116,20 +1118,12 @@ function doGet(e) {
                 const rawDraft = localStorage.getItem(STORAGE_FORM_DRAFT_KEY);
                 if (rawDraft) {
                     const draft = JSON.parse(rawDraft);
-                    ['consultancyName', 'consultantName', 'consultancyAddress', 'contactNumber', 'consultancyRequirements', 'requiredBrochure', 'brochureContactNumber', 'personsAttended'].forEach(fieldId => {
+                    ['consultancyName', 'consultantName', 'consultancyAddress', 'contactNumber', 'consultancyRequirements', 'emailAddress', 'civilServiceInterest'].forEach(fieldId => {
                         const el = document.getElementById(fieldId);
                         if (el && draft[fieldId]) el.value = draft[fieldId];
                     });
-                    const count = Number(document.getElementById('personsAttended').value);
-                    const legacyFood = Array.isArray(draft.foodOptions) ? draft.foodOptions[0] || '' : '';
-                    const attendees = Array.isArray(draft.attendees)
-                        ? draft.attendees
-                        : Array.from({ length: Number.isInteger(count) && count > 0 && count <= 10000 ? count : 0 }, () => ({ food: legacyFood }));
-                    renderAttendeeFields(attendees);
                 }
             } catch (e) {}
-
-            document.getElementById('personsAttended').addEventListener('input', () => renderAttendeeFields());
 
             // Save on every input change
             const saveDraft = function() {
@@ -1141,10 +1135,8 @@ function doGet(e) {
                         consultancyAddress: document.getElementById('consultancyAddress')?.value || '',
                         contactNumber: document.getElementById('contactNumber')?.value || '',
                         consultancyRequirements: document.getElementById('consultancyRequirements')?.value || '',
-                        requiredBrochure: document.getElementById('requiredBrochure')?.value || '',
-                        brochureContactNumber: document.getElementById('brochureContactNumber')?.value || '',
-                        personsAttended: document.getElementById('personsAttended')?.value || '',
-                        attendees: getAttendeeEntries(),
+                        emailAddress: document.getElementById('emailAddress')?.value || '',
+                        civilServiceInterest: document.getElementById('civilServiceInterest')?.value || '',
                         updatedAt: new Date().toISOString()
                     };
                     localStorage.setItem(STORAGE_FORM_DRAFT_KEY, JSON.stringify(draftObj));
@@ -3254,21 +3246,14 @@ function doGet(e) {
             const consultantName = document.getElementById('consultantName').value.trim();
             const consultancyAddress = document.getElementById('consultancyAddress').value.trim();
             const contactNumber = document.getElementById('contactNumber').value.trim();
-            const consultancyRequirements = document.getElementById('consultancyRequirements').value.trim();
-            const requiredBrochure = document.getElementById('requiredBrochure').value.trim();
-            const brochureContactNumber = document.getElementById('brochureContactNumber').value.trim();
-            const personsAttended = document.getElementById('personsAttended').value.trim();
-            const attendees = getAttendeeEntries();
-            if (attendees.length !== Number(personsAttended) || attendees.some((attendee) => !attendee.name || !['Veg', 'Non Veg'].includes(attendee.food))) {
-                showFeedback('Enter a name and food option for every attendee.', true);
-                return;
-            }
-            const foodOptions = Array.from(new Set(attendees.map((attendee) => attendee.food))).join(', ');
+            const schoolName = document.getElementById('consultancyRequirements').value.trim();
+            const emailAddress = document.getElementById('emailAddress').value.trim();
+            const civilServiceInterest = document.getElementById('civilServiceInterest').value.trim();
 
             document.getElementById('formFeedback').classList.add('hidden');
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-rdgold"></i> <span>Saving to Google Sheets...</span>`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-rdgold"></i> <span>Submitting... / சமர்ப்பிக்கப்படுகிறது...</span>`;
             setLiveDriveSaveState('saving', 'Saving response to Google Sheets...');
 
             const record = {
@@ -3276,13 +3261,13 @@ function doGet(e) {
                 consultantName,
                 consultancyAddress,
                 contactNumber,
-                foodOptions,
-                consultancyRequirements,
-                requiredBrochure,
-                brochureContactNumber,
-                personsAttended,
-                attendees,
-                attendeeDetails: attendees.map((attendee, index) => `${index + 1}. ${attendee.name} - ${attendee.food}`).join('\n'),
+                foodOptions: schoolName,
+                consultancyRequirements: emailAddress,
+                requiredBrochure: civilServiceInterest,
+                brochureContactNumber: '',
+                personsAttended: '1',
+                attendees: [],
+                attendeeDetails: '',
                 targetAccount: 'rdccpscollege@gmail.com',
                 submittedAt: new Date().toISOString(),
                 submittedReadable: new Date().toLocaleString('en-IN')
@@ -3309,9 +3294,9 @@ function doGet(e) {
             } catch (saveError) {
                 console.error('Google Sheets save failed:', saveError);
                 setLiveDriveSaveState('error', 'Google Sheets save failed');
-                showFeedback('Your registration was NOT confirmed as saved. Please try again. If this continues, contact RDCCPS support.', true);
+                showFeedback('Your submission could not be saved. Please try again or contact RDCCPS support. / உங்கள் பதிவைச் சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது RDCCPS ஆதரவைத் தொடர்புகொள்ளவும்.', true);
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit Consultancy Registration</span>`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit / சமர்ப்பிக்கவும்</span>`;
                 return;
             }
 
@@ -3333,27 +3318,22 @@ function doGet(e) {
 
             // Google Sheets API write completed above through the Netlify Function.
             // No Google Apps Script is used for this submission.
-            sendZeroConfigAutoEmail(newEntry);
-
             // Clear saved form draft after successful submission
             try { localStorage.removeItem(STORAGE_FORM_DRAFT_KEY); } catch (err) {}
             setLiveDriveSaveState('saved', 'Saved to Google Sheets');
 
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit Consultancy Registration</span>`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit / சமர்ப்பிக்கவும்</span>`;
 
             const summaryBox = document.getElementById('successSummaryBox');
             summaryBox.innerHTML = `
-                <div><strong>1. Consultancy Name:</strong> ${escapeHtml(record.consultancyName)}</div>
-                <div><strong>2. Consultant Name:</strong> ${escapeHtml(record.consultantName)}</div>
-                <div><strong>3. Address:</strong> ${escapeHtml(record.consultancyAddress)}</div>
-                <div><strong>4. Contact Number:</strong> ${escapeHtml(record.contactNumber)}</div>
-                <div><strong>5. Food Options:</strong> ${escapeHtml(record.foodOptions)}</div>
-                <div><strong>6. Requirements:</strong> ${escapeHtml(record.consultancyRequirements)}</div>
-                <div><strong>7. Required Brochure:</strong> ${escapeHtml(record.requiredBrochure)}</div>
-                <div><strong>8. Contact Number for Brochure Printing:</strong> ${escapeHtml(record.brochureContactNumber)}</div>
-                <div><strong>9. Number Of Persons Attended:</strong> ${escapeHtml(record.personsAttended)}</div>
-                <div><strong>Attendees:</strong><br>${escapeHtml(record.attendeeDetails).replace(/\n/g, '<br>')}</div>
+                <div><strong>Student Name / மாணவர் பெயர்:</strong> ${escapeHtml(record.consultancyName)}</div>
+                <div><strong>Parent Name / பெற்றோர் பெயர்:</strong> ${escapeHtml(record.consultantName)}</div>
+                <div><strong>District / மாவட்டம்:</strong> ${escapeHtml(record.consultancyAddress)}</div>
+                <div><strong>Parent Phone / பெற்றோர் தொலைபேசி:</strong> ${escapeHtml(record.contactNumber)}</div>
+                <div><strong>School Name / பள்ளியின் பெயர்:</strong> ${escapeHtml(record.foodOptions)}</div>
+                <div><strong>Email / மின்னஞ்சல்:</strong> ${escapeHtml(record.consultancyRequirements)}</div>
+                <div><strong>Civil Service Exam Preparation / சிவில் சர்வீஸ் தேர்வு தயாரிப்பு:</strong> ${escapeHtml(record.requiredBrochure)}</div>
             `;
 
             document.getElementById('successModal').classList.remove('hidden');
@@ -3364,7 +3344,6 @@ function doGet(e) {
             }
 
             document.getElementById('consultancyForm').reset();
-            renderAttendeeFields([]);
         });
 
         window.closeSuccessModal = function() {
@@ -3388,16 +3367,13 @@ function doGet(e) {
             const body = encodeURIComponent(
                 `RDCCPS "KUDIMAIPANIYATRUPADAI"\n` +
                 `------------------------------------------------------\n` +
-                `1. Consultancy Name: ${r.consultancyName}\n` +
-                `2. Consultant Name: ${r.consultantName}\n` +
-                `3. Consultancy Address: ${r.consultancyAddress}\n` +
-                `4. Contact Number: ${r.contactNumber}\n` +
-                `5. Food Options: ${r.foodOptions}\n` +
-                `6. Consultancy's Requirements: ${r.consultancyRequirements}\n` +
-                `7. Required Brochure: ${r.requiredBrochure}\n` +
-                `8. Contact Number for Brochure Printing: ${r.brochureContactNumber}\n` +
-                `9. Number Of Persons attended this Event from your consultancy: ${r.personsAttended}\n` +
-                `Attendee Names & Food Options:\n${r.attendeeDetails}\n` +
+                `1. Student Name: ${r.consultancyName}\n` +
+                `2. Parent Name: ${r.consultantName}\n` +
+                `3. District: ${r.consultancyAddress}\n` +
+                `4. Parent Phone Number: ${r.contactNumber}\n` +
+                `5. School Name: ${r.foodOptions}\n` +
+                `6. Email Address: ${r.consultancyRequirements}\n` +
+                `7. Interested in Civil Service Exam Preparation: ${r.requiredBrochure}\n` +
                 `------------------------------------------------------\n` +
                 `Submitted On: ${r.submittedReadable}\n` +
                 `Support Contact: +91 9787523888`
@@ -3411,12 +3387,12 @@ function doGet(e) {
             const text = encodeURIComponent(
                 `*RDCCPS "KUDIMAIPANIYATRUPADAI"*\n` +
                 `1. Student Name: ${r.consultancyName}\n` +
-                `2. Parents Name: ${r.consultantName}\n` +
+                `2. Parent Name: ${r.consultantName}\n` +
                 `3. District: ${r.consultancyAddress}\n` +
                 `4. Parents Phone Number: ${r.contactNumber}\n` +
                 `5. School Name: ${r.foodOptions}\n` +
                 `6. Email Address: ${r.consultancyRequirements}\n` +
-                `7. Intrested in Civil Service: ${r.requiredBrochure}\n` +
+                `7. Interested in Civil Service Exam Preparation: ${r.requiredBrochure}\n` +
                 `Submitted On: ${r.submittedReadable}`
             );
             window.open(`https://wa.me/919787523888?text=${text}`, '_blank');
