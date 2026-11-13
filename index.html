@@ -3289,12 +3289,16 @@ function doGet(e) {
                 });
                 const sheetResult = await sheetResponse.json().catch(() => ({}));
                 if (!sheetResponse.ok || !sheetResult.success) {
-                    throw new Error(sheetResult.error || 'Could not save this registration to Google Sheets.');
+                    const saveError = new Error(sheetResult.error || 'Could not save this registration to Google Sheets.');
+                    saveError.code = sheetResult.code;
+                    throw saveError;
                 }
             } catch (saveError) {
                 console.error('Google Sheets save failed:', saveError);
                 setLiveDriveSaveState('error', 'Google Sheets save failed');
-                showFeedback('Your submission could not be saved. Please try again or contact RDCCPS support. / உங்கள் பதிவைச் சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது RDCCPS ஆதரவைத் தொடர்புகொள்ளவும்.', true);
+                showFeedback(saveError.code === 'SHEET_ACCESS_DENIED'
+                    ? 'Registration is temporarily unavailable because Google Sheet access has not been granted. Please contact the organizer. / Google Sheet அணுகல் அனுமதி இல்லாததால் பதிவைச் சேமிக்க முடியவில்லை. நிகழ்ச்சி ஒருங்கிணைப்பாளரைத் தொடர்புகொள்ளவும்.'
+                    : 'Your submission could not be saved. Please try again or contact RDCCPS support. / உங்கள் பதிவைச் சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது RDCCPS ஆதரவைத் தொடர்புகொள்ளவும்.', true);
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane text-rdgold"></i> <span>Submit / சமர்ப்பிக்கவும்</span>`;
                 return;

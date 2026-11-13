@@ -19,9 +19,19 @@ export function response(statusCode, body, origin = "") {
   };
 }
 
+export function allowedOrigins() {
+  const origins = new Set([allowedOrigin()]);
+  for (const value of [process.env.URL, process.env.DEPLOY_PRIME_URL, process.env.DEPLOY_URL]) {
+    try {
+      if (value) origins.add(new URL(value).origin);
+    } catch {}
+  }
+  return origins;
+}
+
 export function isAllowedOrigin(event) {
   const origin = event.headers?.origin || event.headers?.Origin || "";
-  return !origin || origin === allowedOrigin();
+  return !origin || allowedOrigins().has(origin);
 }
 
 export function optionsResponse(event, methods) {
@@ -30,7 +40,7 @@ export function optionsResponse(event, methods) {
   return {
     statusCode: 204,
     headers: {
-      "Access-Control-Allow-Origin": allowedOrigin(),
+      "Access-Control-Allow-Origin": origin || allowedOrigin(),
       "Access-Control-Allow-Methods": `${methods}, OPTIONS`,
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
       "Access-Control-Max-Age": "86400",

@@ -88,3 +88,6 @@ export async function ensureLeadSheetSchema(sheets, spreadsheetId, firstSheet) {
   }
   return sheetTitle;
 }
+
+// Target spreadsheet for all registrations (not a secret; env var overrides it).
+export const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID || "1vVo8OLnLEJOQDLSQgEkBHQl2OmowwpeLSmpkvbcnJhs";

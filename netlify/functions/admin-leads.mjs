@@ -6,10 +6,10 @@ import {
   optionsResponse,
   response,
 } from "./_shared/admin-auth.mjs";
-import { ensureLeadSheetSchema } from "./_shared/lead-sheet-schema.mjs";
+import { ensureLeadSheetSchema, SPREADSHEET_ID } from "./_shared/lead-sheet-schema.mjs";
 
 function sheetsClient() {
-  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.GOOGLE_SHEET_ID) {
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
     throw new Error("Google Sheets is not configured.");
   }
 
@@ -74,7 +74,7 @@ export async function handler(event) {
 
   try {
     const sheets = sheetsClient();
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const spreadsheetId = SPREADSHEET_ID;
     const { firstSheet, sheetTitle, values } = await getSheetRows(sheets, spreadsheetId);
 
     if (event.httpMethod === "DELETE") {
